@@ -122,4 +122,7 @@ export class NavbarComponent implements OnInit {
       }
       return 'Dashboard';
     }
+    seDeconnecter(){
+        this.router.navigate(['/login'])
+    }
 }

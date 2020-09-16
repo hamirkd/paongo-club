@@ -19,6 +19,15 @@ export class LoginComponent implements OnInit {
   
   index=localStorage.getItem("slider-number")?Number(localStorage.getItem("slider-number")):1;
   imgItem="/assets/img/slider-auth/"+this.index+".jpg";
+  informations:string[]=[
+      "Les 10 meilleurs conseils de sécurité pour le Bitcoin",
+      "Les 13 règles de l’investisseur dans Bitcoin et les cryptomonnaies",
+      "Le plus grand chandelier sur 1 heure pour Bitcoin (BTC) depuis le Black"+
+      "Thursday : Bitcoin a fait une chute d’environ 1 500 USD, en moins de 15 min aujourd’hui, 10 mai 2020.",
+      "Le Bitcoin ne profite pas vraiment du «halving», pour l'instant",
+      "Le prix du Bitcoin va-t-il s'envoler après le 3ème «halving» de son histoire ?\nlacements "
+  ];
+  information=this.informations[this.index];
 
   changeImg(){
       setTimeout(() => {
@@ -27,6 +36,7 @@ export class LoginComponent implements OnInit {
             this.index=1;
         }
         this.imgItem="/assets/img/slider-auth/"+this.index+".jpg";
+        this.information=this.informations[this.index];
         localStorage.setItem("slider-number",this.index.toString());
         this.changeImg();
       }, 10000);
@@ -171,5 +181,15 @@ export class LoginComponent implements OnInit {
       }
       return bool;
   }
+  
+  isMobileMenu() {
+    if ($(window).width() > 991) {
+        return false;
+    }
+    return true;
+}
+    seConnecter(){
+        this.router.navigate(["/dashboard"])
+    }
 
 }
