@@ -25,6 +25,7 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    
   ],
   declarations: [
     LoginComponent,

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
 import { NavbarComponent } from 'app/components/navbar/navbar.component';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ export class LoginComponent implements OnInit {
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
+  login:string;
+  password:string;
   
   index=localStorage.getItem("slider-number")?Number(localStorage.getItem("slider-number")):1;
   imgItem="/assets/img/slider-auth/"+this.index+".jpg";
@@ -42,7 +45,8 @@ export class LoginComponent implements OnInit {
       }, 10000);
   }
 
-  constructor( public location: Location, private router: Router) {}
+  constructor( public location: Location, private router: Router,
+    private userService:UserService) {}
 
   ngOnInit() {
     this.changeImg();
@@ -189,7 +193,10 @@ export class LoginComponent implements OnInit {
     return true;
 }
     seConnecter(){
+
+        if(this.userService.loginUserByLoginAndPassword(this.login,this.password))
         this.router.navigate(["/dashboard"])
+
     }
 
 }

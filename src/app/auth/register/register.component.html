@@ -16,41 +16,69 @@
         <div class="sidebar-wrapper" style="width: 100%!important;text-align: -moz-center;">
             <div class="card-body" style="margin-top: 5%!important;
             width: 90%;">
-                <form>
+                <form #userForm="ngForm">
                     <div class="row">
                         <div class="col-md-6">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Nom" type="text">
+                                <input matInput placeholder="Nom" type="text"
+                                [(ngModel)]="user.lastname" required name="lastname">
                             </mat-form-field>
                         </div>
                         <div class="col-md-6">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Prénom(s)" type="text">
+                                <input matInput placeholder="Prénom(s)" type="text"
+                                [(ngModel)]="user.name" required name="name">
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Nom d'utilisateur ou E-mail" type="text">
+                                <input matInput placeholder="Nom d'utilisateur ou E-mail" type="text"
+                                [(ngModel)]="user.login" required name="login">
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Mot de passe" type="password">
+                                <input matInput placeholder="Code Parrain" type="text"
+                                [(ngModel)]="user.codeFather" required name="codeFather">
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Confirmer votre mot de passe" type="password">
+                                <input matInput placeholder="Mot de passe" type="password"
+                                [(ngModel)]="user.password" required name="password">
                             </mat-form-field>
                         </div>
                     </div>
-                    <button mat-raised-button type="submit" class="btn btn-danger pull-center">Valider</button>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Confirmer votre mot de passe" type="password"
+                                [(ngModel)]="confirmPassword" name="confirmPassword"
+                                 required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            confirmPassword: {{confirmPassword}}
+                        </div>
+                        <div class="col-md-12">
+                            user.password: {{user.password}}
+                        </div>
+                        <div class="col-md-12">
+                            confirmPassword!=user.password : {{confirmPassword!=user.password}}
+                        </div>
+                        <div class="col-md-12">
+                            userForm.valide= {{userForm.valide}}
+                        </div>
+                    </div>
+                    <button mat-raised-button type="submit" class="btn btn-danger pull-center" [disabled]="!userForm.valide||confirmPassword!=user.password">Valider</button>
                 </form>
                 <a href="" [routerLink]="'/login'">J'ai déjà un compte</a>
             </div>

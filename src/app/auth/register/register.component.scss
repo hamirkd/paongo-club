@@ -12,6 +12,9 @@
         font-size: xx-large;
         color: white;
     }
+    .sidebar-wrapper>.card-body{
+        width: 80%!important;
+    }
 }
 @media (max-width: 991px){
     .main-panel{
@@ -21,6 +24,9 @@
     .sidebar{
         display: block!important;
         -webkit-transform:none;
+        width: 100%!important;
+    }
+    .sidebar-wrapper>.card-body{
         width: 100%!important;
     }
 }

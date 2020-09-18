@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
 import { NavbarComponent } from 'app/components/navbar/navbar.component';
+import { User } from 'app/models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,8 @@ export class RegisterComponent implements OnInit {
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
+  user:User=new User();
+  confirmPassword:""
   
   index=localStorage.getItem("slider-number")?Number(localStorage.getItem("slider-number")):1;
   imgItem="/assets/img/slider-auth/"+this.index+".jpg";

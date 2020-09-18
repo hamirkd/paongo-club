@@ -14,24 +14,26 @@
         <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)">
         </div>
         <div class="sidebar-wrapper" style="width: 100%!important;text-align: -moz-center;">
-            <div class="card-body" style="margin-top: 10%!important;
-            width: 80%;">
-                <form>
+            <div class="card-body" style="margin-top: 10%!important;">
+                <form #userForm="ngForm">
                     <div class="row">
                         <div class="col-md-12">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Nom d'utilisateur ou E-mail" type="text">
+                                <input matInput [(ngModel)]="login" placeholder="Nom d'utilisateur ou E-mail"
+                                 type="text" name="login" required>
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Mot de passe" type="password">
+                                <input matInput [(ngModel)]="password" placeholder="Mot de passe" 
+                                type="password" name="password" required>
                             </mat-form-field>
                         </div>
                     </div>
-                    <button mat-raised-button type="submit" class="btn btn-danger pull-center" (click)="seConnecter()">Se connecter</button>
+                    <button mat-raised-button type="submit" class="btn btn-danger pull-center"
+                     (click)="seConnecter()" [disabled]="!userForm.valid">Se connecter</button>
                 </form>
                 <a href="" [routerLink]="'/register'">Je n'ai pas de compte</a>
             </div>

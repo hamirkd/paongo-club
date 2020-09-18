@@ -1,0 +1,39 @@
+export class User{
+    id:string;
+    name:string;
+    lastname:string;
+    username:string;
+    login:string;
+    email:string;
+    password:string;
+    pictureUrl:string;
+    status:"ENABLE"|"DISABLE"="DISABLE";
+    codeFather:string;
+}
+
+export const USERDATA:User[]=[
+    {
+        id:"2020090171119",name:"Hamadou",lastname:"DAO",username:"daohamadou",
+        login:"daohamadou",email:"daohamadou@gmail.com",
+        password:"daohamadou",pictureUrl:"assets/users/daohamadou.jpg",
+        status:"ENABLE",codeFather:"2020090171122",
+    },
+    {
+        id:"2020090171120",name:"Adama",lastname:"KOUMARE",
+        username:"adamakoumare",login:"adamakoumare",email:"adamakoumare@gmail.com",
+        password:"adamakoumare",pictureUrl:"assets/users/adamakoumare.jpg",
+        status:"ENABLE",codeFather:"2020090171122",
+    },
+    {
+        id:"2020090171121",name:"Salif",lastname:"ZONGO",username:"salifzongo",
+        login:"salifzongo",email:"salifzongo@gmail.com",
+        password:"salifzongo",pictureUrl:"assets/users/salifzongo.jpg",
+        status:"ENABLE",codeFather:"2020090171119",
+    },
+    {
+        id:"2020090171122",name:"Ousseni",lastname:"Bonkoungou",username:"oussenibonkoungou",
+        login:"oussenibonkoungou",email:"oussenibonkoungou@gmail.com",
+        password:"oussenibonkoungou",pictureUrl:"assets/users/oussenibonkoungou.jpg",
+        status:"ENABLE",codeFather:"",
+    },
+]
