@@ -28,6 +28,7 @@ export class UserService {
     const date:Date=new Date();
     user.id=date.getFullYear()+""+date.getMonth()+date.getDate()+date.getHours()+date.getMinutes();
     USERDATA.push(user);
+    this.user=user;
     return this.findUserByLogin(login);
   }
 

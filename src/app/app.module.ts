@@ -23,6 +23,7 @@ import {
 } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthComponent } from './auth/auth.component';
+import { EspaceCustomerComponent } from './espace-customer/espace-customer.component';
 
 @NgModule({
   imports: [

@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthComponent } from './auth/auth.component';
+import { EspaceCustomerComponent } from './espace-customer/espace-customer.component';
 
 const routes: Routes =[
   {
@@ -24,6 +25,13 @@ const routes: Routes =[
     children: [{
       path: '',
       loadChildren: './auth/auth.module#AuthModule'
+    }]
+  }, {
+    path: '',
+    component: EspaceCustomerComponent,
+    children: [{
+      path: '',
+      loadChildren: './espace-customer/espace-customer.module#EspaceCustomerModule'
     }]
   }
 ];

@@ -64,21 +64,7 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            confirmPassword: {{confirmPassword}}
-                        </div>
-                        <div class="col-md-12">
-                            user.password: {{user.password}}
-                        </div>
-                        <div class="col-md-12">
-                            confirmPassword!=user.password : {{confirmPassword!=user.password}}
-                        </div>
-                        <div class="col-md-12">
-                            userForm.valide= {{userForm.valide}}
-                        </div>
-                    </div>
-                    <button mat-raised-button type="submit" class="btn btn-danger pull-center" [disabled]="!userForm.valide||confirmPassword!=user.password">Valider</button>
+                    <button mat-raised-button type="submit" class="btn btn-danger pull-center" [disabled]="!userForm.valid||confirmPassword!=user.password" (click)="addUser()">Valider</button>
                 </form>
                 <a href="" [routerLink]="'/login'">J'ai déjà un compte</a>
             </div>

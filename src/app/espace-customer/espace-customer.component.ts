@@ -6,51 +6,21 @@ import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
 import { NavbarComponent } from 'app/components/navbar/navbar.component';
-import { User } from 'app/models/user.model';
-import { UserService } from 'app/services/user.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-espace-customer',
+  templateUrl: './espace-customer.component.html',
+  styleUrls: ['./espace-customer.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class EspaceCustomerComponent implements OnInit {
+
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
-  user:User=new User();
-  confirmPassword:""
-  
-  index=localStorage.getItem("slider-number")?Number(localStorage.getItem("slider-number")):1;
-  imgItem="/assets/img/slider-auth/"+this.index+".jpg";
-  informations:string[]=[
-      "Les 10 meilleurs conseils de sécurité pour le Bitcoin",
-      "Les 13 règles de l’investisseur dans Bitcoin et les cryptomonnaies",
-      "Le plus grand chandelier sur 1 heure pour Bitcoin (BTC) depuis le Black"+
-      "Thursday : Bitcoin a fait une chute d’environ 1 500 USD, en moins de 15 min aujourd’hui, 10 mai 2020.",
-      "Le Bitcoin ne profite pas vraiment du «halving», pour l'instant",
-      "Le prix du Bitcoin va-t-il s'envoler après le 3ème «halving» de son histoire ?\nlacements "
-  ];
-  information=this.informations[this.index];
 
-  changeImg(){
-      setTimeout(() => {
-          this.index=this.index+1;
-        if(this.index==6){
-            this.index=1;
-        }
-        this.imgItem="/assets/img/slider-auth/"+this.index+".jpg";
-        this.information=this.informations[this.index];
-        localStorage.setItem("slider-number",this.index.toString());
-        this.changeImg();
-      }, 10000);
-  }
-
-  constructor( public location: Location, private router: Router,
-    private userService:UserService) {}
+  constructor( public location: Location, private router: Router) {}
 
   ngOnInit() {
-    this.changeImg();
       const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
       if (isWindows && !document.getElementsByTagName('body')[0].classList.contains('sidebar-mini')) {
@@ -187,16 +157,5 @@ export class RegisterComponent implements OnInit {
       return bool;
   }
 
-  isMobileMenu() {
-    if ($(window).width() > 991) {
-        return false;
-    }
-    return true;
-};
-addUser(){
-    if(this.userService.addAccount(this.user.login,this.user.name,
-        this.user.lastname,this.user.password,this.user.codeFather)){
-            this.router.navigate(['/dashboard'])
-        }
 }
-}
+
