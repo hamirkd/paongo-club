@@ -12,8 +12,14 @@
         font-size: xx-large;
         color: white;
     }
+    
+    .sidebar-wrapper{
+        text-align: -webkit-center;
+        text-align: -moz-center;
+        width: 100%!important;
+        }
     .sidebar-wrapper>.card-body{
-        width: 80%!important;
+        margin-top: 5%!important;width: 90%;
     }
 }
 @media (max-width: 991px){
