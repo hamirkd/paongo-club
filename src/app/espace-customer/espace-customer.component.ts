@@ -84,17 +84,12 @@ export class EspaceCustomerComponent implements OnInit {
 
       $('.fixed-plugin .badge').click(function(){
           let $full_page_background = $('.full-page-background');
-
-
           $(this).siblings().removeClass('active');
           $(this).addClass('active');
-
           var new_color = $(this).data('color');
-
           if($sidebar.length !== 0){
               $sidebar.attr('data-color', new_color);
           }
-
           if($sidebar_responsive.length != 0){
               $sidebar_responsive.attr('data-color',new_color);
           }
@@ -102,13 +97,9 @@ export class EspaceCustomerComponent implements OnInit {
 
       $('.fixed-plugin .img-holder').click(function(){
           let $full_page_background = $('.full-page-background');
-
           $(this).parent('li').siblings().removeClass('active');
           $(this).parent('li').addClass('active');
-
-
           var new_image = $(this).find("img").attr('src');
-
           if($sidebar_img_container.length !=0 ){
               $sidebar_img_container.fadeOut('fast', function(){
                  $sidebar_img_container.css('background-image','url("' + new_image + '")');
@@ -117,7 +108,6 @@ export class EspaceCustomerComponent implements OnInit {
           }
 
           if($full_page_background.length != 0){
-
               $full_page_background.fadeOut('fast', function(){
                  $full_page_background.css('background-image','url("' + new_image + '")');
                  $full_page_background.fadeIn('fast');

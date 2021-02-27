@@ -1,14 +1,63 @@
 <div class="main-content">
-    <div class="container-fluid">
-      <div class="card">
-          <div class="card-header card-header-danger">
-              <h4 class="card-title">Mon argent</h4>
-              <p class="card-category">Mon argent</p>
-          </div>
-          <div class="card-body">
-              <div id="typography">
-                  </div>
-          </div>
-      </div>
-  </div>
-  
+    <div class="container-fluid col-md-12">
+        <div class="col-lg-6">
+        <div class="row">
+                <div class="col-lg-6 col-md-3 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">{{get_titre_from_user(1)?get_titre_from_user(1).plan:'1'}}
+                                <i class="{{getIcon(get_titre_from_user(1)?get_titre_from_user(1).plan:'1')}}"></i>
+                            </h4>
+                        </div>
+                        <div
+                            class="card-body {{get_titre_from_user(1)?get_titre_from_user(1).montant:'btn fa fa-plus'}}">
+                            {{get_titre_from_user(2)?get_titre_from_user(2).montant:''}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">{{get_titre_from_user(2)?get_titre_from_user(2).plan:'2'}}
+                                <i class="{{getIcon(get_titre_from_user(2)?get_titre_from_user(2).plan:'2')}}"></i>
+
+                            </h4>
+                        </div>
+                        <div
+                            class="card-body {{get_titre_from_user(2)?get_titre_from_user(2).montant:'btn fa fa-plus'}}">
+                            {{get_titre_from_user(2)?get_titre_from_user(2).montant:''}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">{{get_titre_from_user(3)?get_titre_from_user(3).plan:'3'}}
+                                <i class="{{getIcon(get_titre_from_user(3)?get_titre_from_user(3).plan:'3')}}"></i>
+                            </h4>
+                        </div>
+                        <div
+                            class="card-body {{get_titre_from_user(3)?get_titre_from_user(3).montant:'btn fa fa-plus'}}">
+                            {{get_titre_from_user(3)?get_titre_from_user(3).montant:''}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">{{get_titre_from_user(4)?get_titre_from_user(4).plan:'4'}}
+                                <i class="{{getIcon(get_titre_from_user(4)?get_titre_from_user(4).plan:'4')}}"></i>
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <button class="btn" *ngIf="!get_titre_from_user(4)">
+                                <span class="fa fa-plus" aria-hidden="true"></span>
+                            </button>
+                            {{get_titre_from_user(4)?get_titre_from_user(4).montant:''}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

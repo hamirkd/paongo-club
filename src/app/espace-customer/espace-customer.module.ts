@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MyMoneyComponent } from './my-money/my-money.component';
-import { MyMembersComponent } from './my-members/my-members.component';
 import { EspaceCustomerComponent } from './espace-customer.component';
 
 import { RouterModule } from '@angular/router';
@@ -19,7 +18,6 @@ import { ComponentsModule } from 'app/components/components.module';
 @NgModule({
   declarations: [
     MyMoneyComponent, 
-    MyMembersComponent, 
     EspaceCustomerComponent
   ],
   imports: [

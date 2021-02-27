@@ -4,69 +4,104 @@
           <div class="col-md-8">
               <div class="card">
                   <div class="card-header card-header-danger">
-                      <h4 class="card-title">Edit Profile</h4>
-                      <p class="card-category">Complete your profile</p>
+                      <h4 class="card-title">Modifier votre profil</h4>
                   </div>
                   <div class="card-body">
                       <form>
                           <div class="row">
-                              <div class="col-md-5">
+                              <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Company (disabled)" disabled>
+                                    <input matInput placeholder="E-mail" disabled [(ngModel)]="user.email" name="email">
                                   </mat-form-field>
                               </div>
-                              <div class="col-md-3">
+                              <div class="col-md-6">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Username">
-                                  </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email address" type="email">
+                                    <input matInput placeholder="Téléphone " type="text" disabled [(ngModel)]="user.telephone" name="telephone">
                                   </mat-form-field>
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Fist Name" type="text">
+                                  <input matInput placeholder="Prénom(s)" type="text" [(ngModel)]="user.first_name" name="first_name">
                                 </mat-form-field>
                               </div>
                               <div class="col-md-6">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Last Name" type="text">
+                                  <input matInput placeholder="Nom" type="text" [(ngModel)]="user.last_name" name="last_name">
                                 </mat-form-field>
                               </div>
                           </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Profession" type="text" [(ngModel)]="user.occupation" name="occupation">
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                              <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Adresse (physique)" type="text" [(ngModel)]="user.physical_address" name="physical_address">
+                              </mat-form-field>
+                            </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Ville" type="text" [(ngModel)]="user.town" name="town">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Pays" type="text" [(ngModel)]="user.country" name="country">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Code postal" type="text" [(ngModel)]="user.postal_code" name="postal_code">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <label class="col-md-12 text-danger">Personne à contacter en cas de besoin</label>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Prénom(s)" type="text" [(ngModel)]="user.s_first_name" name="s_first_name">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Nom" type="text" [(ngModel)]="user.s_last_name" name="s_last_name">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Téléphone" type="text" [(ngModel)]="user.s_telephone" name="s_telephone">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Ville" type="text" [(ngModel)]="user.s_town" name="s_town">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Pays" type="text" [(ngModel)]="user.s_country" name="s_country">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Code postal" type="text" [(ngModel)]="user.s_postal_code" name="s_postal_code">
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <br>
                           <div class="row">
                               <div class="col-md-12">
+                                <label>A propos de moi</label>
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Adress" type="text">
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="City" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Country" type="text">
-                                </mat-form-field>
-                              </div>
-                              <div class="col-md-4">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Postal Code" type="text">
-                                </mat-form-field>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-12">
-                                <label>About Me</label>
-                                <mat-form-field class="example-full-width">
-                                   <textarea matInput placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."></textarea>
+                                   <textarea matInput placeholder="" [(ngModel)]="user.description" name="description"></textarea>
                                  </mat-form-field>
                                   <!-- <div class="form-group">
 
@@ -77,7 +112,7 @@
                                   </div> -->
                               </div>
                           </div>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="modifier_information()">Modifier mon profil</button>
                           <div class="clearfix"></div>
                       </form>
                   </div>
@@ -96,7 +131,6 @@
                       <p class="card-description">
                           Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
                       </p>
-                      <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>
                   </div>
               </div>
           </div>

@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthComponent } from './auth/auth.component';
 import { EspaceCustomerComponent } from './espace-customer/espace-customer.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes =[
   {
@@ -18,7 +19,10 @@ const routes: Routes =[
     children: [{
       path: '',
       loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule'
-    }]
+    }],
+    canActivate: [
+      AuthGuardService
+  ]
   }, {
     path: '',
     component: AuthComponent,
@@ -32,7 +36,10 @@ const routes: Routes =[
     children: [{
       path: '',
       loadChildren: './espace-customer/espace-customer.module#EspaceCustomerModule'
-    }]
+    }],
+    canActivate: [
+      AuthGuardService
+  ]
   }
 ];
 

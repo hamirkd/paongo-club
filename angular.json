@@ -13,9 +13,9 @@
           "options": {
             "outputPath": "dist",
             "index": "src/index.html",
-            "main": "src/main.ts",
             "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
+            "main": "src/main.ts",
             "assets": [
               "src/assets",
               "src/favicon.ico"
@@ -23,7 +23,8 @@
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "src/assets/scss/material-dashboard.scss",
-              "src/assets/css/demo.css"
+              "src/assets/css/demo.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
@@ -93,7 +94,8 @@
             "styles": [
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "src/assets/scss/material-dashboard.scss",
-              "src/assets/css/demo.css"
+              "src/assets/css/demo.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "assets": [
               "src/assets",

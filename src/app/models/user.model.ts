@@ -1,39 +1,24 @@
 export class User{
     id:string;
-    name:string;
-    lastname:string;
+    first_name:string;
+    last_name:string;
     username:string;
-    login:string;
     email:string;
+    telephone:string;
     password:string;
     pictureUrl:string;
     status:"ENABLE"|"DISABLE"="DISABLE";
-    codeFather:string;
+    token?: string;
+    occupation:string;
+    physical_address:string;
+    town:string;
+    country:string;
+    postal_code:string;
+    s_first_name:string;
+    s_last_name:string;
+    s_town:string;
+    s_country:string;
+    s_postal_code:string;
+    s_telephone:string;
+    description:string;
 }
-
-export const USERDATA:User[]=[
-    {
-        id:"2020090171119",name:"Hamadou",lastname:"DAO",username:"daohamadou",
-        login:"daohamadou",email:"daohamadou@gmail.com",
-        password:"daohamadou",pictureUrl:"assets/users/daohamadou.jpg",
-        status:"ENABLE",codeFather:"2020090171122",
-    },
-    {
-        id:"2020090171120",name:"Adama",lastname:"KOUMARE",
-        username:"adamakoumare",login:"adamakoumare",email:"adamakoumare@gmail.com",
-        password:"adamakoumare",pictureUrl:"assets/users/adamakoumare.jpg",
-        status:"ENABLE",codeFather:"2020090171122",
-    },
-    {
-        id:"2020090171121",name:"Salif",lastname:"ZONGO",username:"salifzongo",
-        login:"salifzongo",email:"salifzongo@gmail.com",
-        password:"salifzongo",pictureUrl:"assets/users/salifzongo.jpg",
-        status:"ENABLE",codeFather:"2020090171119",
-    },
-    {
-        id:"2020090171122",name:"Ousseni",lastname:"Bonkoungou",username:"oussenibonkoungou",
-        login:"oussenibonkoungou",email:"oussenibonkoungou@gmail.com",
-        password:"oussenibonkoungou",pictureUrl:"assets/users/oussenibonkoungou.jpg",
-        status:"ENABLE",codeFather:"",
-    },
-]

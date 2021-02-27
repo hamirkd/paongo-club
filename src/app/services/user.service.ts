@@ -1,45 +1,57 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User, USERDATA } from '../models/user.model';
+import { User } from '../models/user.model';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
+import { AuthGuardService } from './auth-guard.service';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
+};
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor() {
+  constructor(private http: HttpClient, private authGuardService: AuthGuardService) {
   }
-  user:User=new User();
+  baseUrl = environment.urlapi + "/";
 
-  loginUserByLoginAndPassword(login:string,password:string):User{
-    this.user= USERDATA.find(u=>u.login.includes(login.trim())&&u.password.includes(password.trim()));
-  return this.user;
-  }
-
-  findUserByLogin(login:string):User{
-    return USERDATA.find(u=>u.login.includes(login.trim()));
+  isLoginIn() {
+    return this.authGuardService.isLoginIn;
   }
 
-  findUserById(id:string):User{
-    return USERDATA.find(u=>u.id.includes(id.trim()));
+  currentUser() {
+    if (sessionStorage.getItem('user_access')) {
+      return JSON.parse(sessionStorage.getItem('user_access'));
+    }
+    return this.authGuardService.currentUserValue;
+  }
+  logout() {
+    console.log('ici')
+    this.authGuardService.logout();
   }
 
-  addAccount(login:string,name:string,lastname:string,password:string,codeFather:string):User{
-    const user:User=new User();
-    const date:Date=new Date();
-    user.id=date.getFullYear()+""+date.getMonth()+date.getDate()+date.getHours()+date.getMinutes();
-    USERDATA.push(user);
-    this.user=user;
-    return this.findUserByLogin(login);
+  loginUserByLoginAndPassword(login: string, password: string): Observable<any> {
+    return this.http.post(this.baseUrl + 'login.php', { email: login, password: password });
   }
 
-  enableUserAccount(idUser:string):boolean{
-    const user:User=this.findUserById(idUser);
-    if(!user) return false;
-    user.status="ENABLE";
-    USERDATA.splice(USERDATA.findIndex(u=>u.id==idUser),1);
-    USERDATA.push(user);
-    return true;
+  findUserById(): Observable<any> {
+    let id;
+    if (this.currentUser()) id = this.currentUser().id;
+    return this.http.get(this.baseUrl + "get_user.php?id=" + id);
+  }
+  updateUser(user: User): Observable<any> {
+    let id;
+    console.log(user)
+    if (this.currentUser()) id = this.currentUser().id;
+    return this.http.post(this.baseUrl + "update_user.php?id=" + id, user);
   }
 
-  
+  addAccount(user: User): Observable<any> {
+    console.log(user)
+    return this.http.post(this.baseUrl + 'register.php', user);
+  }
+
+
 }
