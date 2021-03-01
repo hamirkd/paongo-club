@@ -17,8 +17,6 @@ export class AuthGuardService implements CanActivate {
         }
         this.user = JSON.parse(sessionStorage.getItem("user_access"));
         if (this.user) {
-            
-            console.log(this.user)
             return true;
         }
         this._router.navigate(['/login']);
@@ -48,7 +46,6 @@ export class AuthGuardService implements CanActivate {
 
     logout(){
         this.user=null;
-        console.log(this.user)
         sessionStorage.removeItem("user_access");
         this._router.navigate(['/login']);
         return false;

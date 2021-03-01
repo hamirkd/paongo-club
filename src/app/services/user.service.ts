@@ -28,7 +28,6 @@ export class UserService {
     return this.authGuardService.currentUserValue;
   }
   logout() {
-    console.log('ici')
     this.authGuardService.logout();
   }
 
@@ -43,13 +42,11 @@ export class UserService {
   }
   updateUser(user: User): Observable<any> {
     let id;
-    console.log(user)
     if (this.currentUser()) id = this.currentUser().id;
     return this.http.post(this.baseUrl + "update_user.php?id=" + id, user);
   }
 
   addAccount(user: User): Observable<any> {
-    console.log(user)
     return this.http.post(this.baseUrl + 'register.php', user);
   }
 

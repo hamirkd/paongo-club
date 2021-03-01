@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Location,  PopStateEvent } from '@angular/common';
-import 'rxjs/add/operator/filter';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
 import { UserService } from 'app/services/user.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-login',
@@ -44,11 +42,10 @@ export class LoginComponent implements OnInit {
     }
 
     constructor(public location: Location, private router: Router,
-        private userService: UserService,private toastr: ToastrService) {
+        private userService: UserService) {
         if (this.userService.isLoginIn()) {
             this.router.navigate(["/mes-titres"]);
         }
-        console.log(this.userService.isLoginIn())
     }
     public loading = false;
 
@@ -200,15 +197,14 @@ export class LoginComponent implements OnInit {
         this.loading=true;
         this.userService.loginUserByLoginAndPassword(this.login, this.password).subscribe(data => {
             console.log(data);
-            console.log(this.userService.loginUserByLoginAndPassword(this.login, this.password))
             sessionStorage.setItem("user_access", JSON.stringify(data));
             this.loading=false;
-            this.toastr.success('Bienvenue');
+            // this.toastr.success('Bienvenue');
             this.router.navigate(["/mes-titres"]);
             
         },err=>{
             console.log(err)
-            this.toastr.error('Impossible de se connecter, veuillez vérifier vos identifiants');
+            // this.toastr.error('Impossible de se connecter, veuillez vérifier vos identifiants');
         })
 
 

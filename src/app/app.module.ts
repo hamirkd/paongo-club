@@ -15,12 +15,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { NgxLoadingModule } from 'ngx-loading';
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
-    ToastrModule.forRoot(), // ToastrModule added
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,

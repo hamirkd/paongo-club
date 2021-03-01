@@ -18,7 +18,6 @@ export class MyMoneyComponent implements OnInit {
   ngOnInit(): void {
     this.titreService.findAllTitreOfUser().subscribe(data=>{
       this._TITRE=data as Titre[];
-      console.log(data)
     })
   }
 
