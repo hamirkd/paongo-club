@@ -2,60 +2,28 @@
     <div class="container-fluid col-md-12">
         <div class="col-lg-6">
         <div class="row">
-                <div class="col-lg-6 col-md-3 col-sm-6">
-                    <div class="card">
+                <div class="col-lg-6 col-md-3 col-sm-6" *ngFor="let titre of _TITRE">
+                    <div class="card {{getBg(titre.plan)}}" style="height: 12rem;">
                         <div class="card-header">
-                            <h4 class="card-title">{{get_titre_from_user(1)?get_titre_from_user(1).plan:'1'}}
-                                <i class="{{getIcon(get_titre_from_user(1)?get_titre_from_user(1).plan:'1')}}"></i>
+                            <h4 class="card-title">{{titre.plan}}
+                                <i class="{{getIcon(titre.plan)}}"></i>
                             </h4>
                         </div>
-                        <div
-                            class="card-body {{get_titre_from_user(1)?get_titre_from_user(1).montant:'btn fa fa-plus'}}">
-                            {{get_titre_from_user(2)?get_titre_from_user(2).montant:''}}
+                        <div class="card-body" style="font-size: xxx-large;">
+                            {{titre.montant}}$
+                        </div>
+                        <div class="card-footer" class="row">
+                            <div class="col-lg-6 col-md-3 col-sm-6">{{titre.etat_paiement|lowercase}}</div>
+                            <div class="col-lg-6 col-md-3 col-sm-6">{{titre.date_miseajour}}</div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-3 col-sm-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">{{get_titre_from_user(2)?get_titre_from_user(2).plan:'2'}}
-                                <i class="{{getIcon(get_titre_from_user(2)?get_titre_from_user(2).plan:'2')}}"></i>
-
-                            </h4>
-                        </div>
-                        <div
-                            class="card-body {{get_titre_from_user(2)?get_titre_from_user(2).montant:'btn fa fa-plus'}}">
-                            {{get_titre_from_user(2)?get_titre_from_user(2).montant:''}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-3 col-sm-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">{{get_titre_from_user(3)?get_titre_from_user(3).plan:'3'}}
-                                <i class="{{getIcon(get_titre_from_user(3)?get_titre_from_user(3).plan:'3')}}"></i>
-                            </h4>
-                        </div>
-                        <div
-                            class="card-body {{get_titre_from_user(3)?get_titre_from_user(3).montant:'btn fa fa-plus'}}">
-                            {{get_titre_from_user(3)?get_titre_from_user(3).montant:''}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-3 col-sm-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="card-title">{{get_titre_from_user(4)?get_titre_from_user(4).plan:'4'}}
-                                <i class="{{getIcon(get_titre_from_user(4)?get_titre_from_user(4).plan:'4')}}"></i>
-                            </h4>
-                        </div>
-                        <div class="card-body">
-                            <button class="btn" *ngIf="!get_titre_from_user(4)">
-                                <span class="fa fa-plus" aria-hidden="true"></span>
-                            </button>
-                            {{get_titre_from_user(4)?get_titre_from_user(4).montant:''}}
-                        </div>
-                    </div>
+                <div class="col-lg-6 col-md-3 col-sm-6" *ngIf="btn_add">
+                    <a class="card btn btn-danger" href="https://paongo-trading.com/offre-de-partenariat/">
+                        <a class="card-body btn btn-danger" href="https://paongo-trading.com/offre-de-partenariat/">
+                            <a href="https://paongo-trading.com/offre-de-partenariat/" class="btn btn-danger" *ngIf="btn_add">Ajouter</a>
+                        </a>
+                    </a>
                 </div>
             </div>
         </div>

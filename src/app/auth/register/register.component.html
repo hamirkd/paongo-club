@@ -63,7 +63,7 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <button mat-raised-button type="submit" class="btn btn-danger pull-center" [disabled]="!userForm.valid||confirmPassword!=user.password" (click)="registerUser()">Valider</button>
+                    <button mat-raised-button type="submit" class="btn btn-danger pull-center" [disabled]="!userForm.valid||confirmPassword!=user.password||on_register" (click)="registerUser()">Valider</button>
                 </form>
                 <a href="" [routerLink]="'/login'">J'ai déjà un compte</a>
             </div>

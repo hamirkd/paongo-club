@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Location, PopStateEvent } from '@angular/common';
 import 'rxjs/add/operator/filter';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
-import { NavbarComponent } from 'app/components/navbar/navbar.component';
 import { User } from 'app/models/user.model';
 import { UserService } from 'app/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-register',
@@ -46,11 +46,11 @@ export class RegisterComponent implements OnInit {
         }, 10000);
     }
 
-    constructor(public location: Location, private router: Router,
+    constructor(public location: Location, private router: Router, private toasterService: ToastrService,
         private userService: UserService) { }
-
+        on_register=false;
     ngOnInit() {
-        this.registerUser();
+        
         this.changeImg();
         const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
@@ -195,16 +195,32 @@ export class RegisterComponent implements OnInit {
         return true;
     };
     registerUser() {
-        this.user.first_name="Hamadou";
-        this.user.last_name="DAO";
-        this.user.email="daohamadou@gmail.com"+(new Date().getTime());
-        this.user.password="daohamadou";
-        this.userService.addAccount(this.user).subscribe(data=>{
+        this.on_register=true;
+        this.userService.addAccount(this.user).subscribe(data => {
             // Message de connexion de compte
-            console.log(data);
-           // this.router.navigate(['/login']);
-        },err=>{
+            switch (data.status) {
+                case 400:
+                    this.toasterService.error("Veuillez vérifier les informations du compte");
+                    break;
+                case 200:
+                    this.toasterService.success("Votre compte a été crée");
+                    setTimeout(() => {
+                        this.toasterService.success("Vous serez rediriger vers la page de connexion");
+                    }, 2000);
+                    setTimeout(() => {
+                        this.router.navigate(['/login']);
+                    }, 5000);
+                    break;
+
+                default:
+                    break;
+            }
+            this.on_register=true;
+
+        }, err => {
             console.log(err);
+            this.on_register=true;
+            this.toasterService.error(err.message, 'Création de compte')
             // Message de non création de compte
         })
     }

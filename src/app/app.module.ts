@@ -11,19 +11,25 @@ import { AppComponent } from './app.component';
 
 import { AgmCoreModule } from '@agm/core';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from './services/user.service';
 import { AuthGuardService } from './services/auth-guard.service';
+
+import { ToastrModule } from 'ngx-toastr';
 import { NgxLoadingModule } from 'ngx-loading';
+import { JwtInterceptor } from './_helpers/jwt.interceptor';
+
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,
     RouterModule,
-    AppRoutingModule, HttpClientModule, NgxLoadingModule.forRoot({}),
+    NgxLoadingModule.forRoot({}),
+    AppRoutingModule, HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })
@@ -33,7 +39,9 @@ import { NgxLoadingModule } from 'ngx-loading';
     AdminLayoutComponent
 
   ],
-  providers: [UserService, AuthGuardService],
+  providers: [UserService, AuthGuardService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

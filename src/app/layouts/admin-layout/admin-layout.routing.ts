@@ -7,6 +7,7 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { MyTitresComponent } from './my-titres/my-titres.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -52,6 +53,7 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     { path: 'user-profile',   component: UserProfileComponent },
+    { path: 'my-titres',   component: MyTitresComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },

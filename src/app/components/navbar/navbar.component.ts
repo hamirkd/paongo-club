@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from 'app/services/user.service';
+import { ROUTES_ADMIN, ROUTES_USER } from '../sidebar/sidebar.component';
 
 @Component({
     selector: 'app-navbar',
@@ -24,7 +24,12 @@ export class NavbarComponent implements OnInit {
     public loading=false;
 
     ngOnInit() {
-        this.listTitles = ROUTES.filter(listTitle => listTitle);
+        if(this.userService.isAdmin()){
+            this.listTitles = ROUTES_ADMIN.filter(listTitle => listTitle);
+          }
+          else{
+            this.listTitles = ROUTES_USER.filter(listTitle => listTitle);
+          }
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
         this.router.events.subscribe((event) => {

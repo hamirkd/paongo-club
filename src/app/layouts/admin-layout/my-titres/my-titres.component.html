@@ -1,0 +1,79 @@
+<div class="main-content">
+    <div class="container-fluid col-md-12">
+        <a href="https://paongo-trading.com/offre-de-partenariat/" class="btn btn-danger" *ngIf="btn_add">Ajouter</a>
+        <span class="btn float-right btn-danger" *ngIf="list_or_card" (click)="change_list_or_card()"><i class="fa fa-th"></i></span>
+        <span class="btn float-right btn-danger" *ngIf="!list_or_card" (click)="change_list_or_card()"><i class="fa fa-list"></i></span>
+        
+        <div class="col-lg-12" *ngIf="!list_or_card">
+            <div class="row">
+                <div class="col-lg-4 col-md-3 col-sm-4" *ngFor="let titre of _TITRE">
+                    <div class="card {{getBg(titre.plan)}}" style="min-height: 12rem;">
+                        <div class="card-header">
+                            <h4 class="card-title">{{titre.plan}}
+                                <i class="{{getIcon(titre.plan)}}"></i>
+                            </h4>
+                        </div>
+                        <div class="card-body">
+                            <p>{{titre.nomprenom}}</p>
+                            <p>{{titre.emailadresse}}</p>
+                            <p>{{titre.telephone}}</p>
+                            <p>{{titre.montant}}$</p>
+                            <hr>
+                        </div>
+                        <div class="card-footer" class="row">
+                            <div class="col-lg-6 col-md-3 col-sm-6">{{titre.etat_paiement|lowercase}}</div>
+                            <div class="col-lg-6 col-md-3 col-sm-6">{{titre.date_miseajour}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+        <div class="col-lg-12 table-responsive" *ngIf="list_or_card">
+            <table class="table table-hover table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nom Prénom</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Téléphone</th>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Montant</th>
+                        <th scope="col">Status Paiement</th>
+                        <th scope="col">Etat Investissement</th>
+                        <th scope="col">Date de Mise à jour</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let titre of _TITRE">
+
+                        <td>{{titre.id}}</td>
+                        <td>{{titre.nomprenom}}</td>
+                        <td>{{titre.emailadresse}}</td>
+                        <td>{{titre.telephone}}</td>
+                        <td>{{titre.plan}}</td>
+                        <td>{{titre.montant}}$</td>
+                        <td>
+                            <label class="paiement-status-non-paye" *ngIf="titre.etat_paiement=='NON_PAYEE'">{{'Non Payé'}}</label>
+                            <label class="paiement-status-paye" *ngIf="titre.etat_paiement!='NON_PAYEE'">{{'Payé'}}</label>
+                        </td>
+                        <td>{{titre.etat_investissement}}</td>
+                        <td>{{titre.date_miseajour}}</td>
+                        <td>
+                            <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLinkU"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-sm">
+                                ...
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLinkU">
+                                <a class="dropdown-item" href="javascript:void(0)" (click)="paye_titre_manuel(titre)">Payer</a>
+                                <a class="dropdown-item" href="javascript:void(0)">Debuter</a>
+                                <a class="dropdown-item" href="javascript:void(0)">Annuler</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

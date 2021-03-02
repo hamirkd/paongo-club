@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Titre } from 'app/models/titre.model';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { AuthGuardService } from './auth-guard.service';
@@ -17,6 +18,13 @@ export class TitreService {
     let email='';
     if(this.userService.currentUser()) email=this.userService.currentUser().email;
     return this.http.get(this.baseUrl+"/gettitre.php?email="+email);
+  }
+  findAllTitreOfUsers():Observable<any>{
+    let email='';
+    return this.http.get(this.baseUrl+"/gettitres.php");
+  }
+  payeTitreManuelAdmin(titre:Titre):Observable<any>{
+    return this.http.post(this.baseUrl+"titre_paye_manuel_admin.php",{id:titre.id});
   }
 
 }

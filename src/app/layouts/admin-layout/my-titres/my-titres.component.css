@@ -1,0 +1,13 @@
+.paiement-status-paye{
+    border-radius: 10px;
+    background-color: green;
+    color: #fff;
+    padding: 4px;
+}
+.paiement-status-non-paye{
+    border-radius: 10px;
+    padding: 4px;
+    color: #fff;
+    background-color: #f44336;
+    border-color: #f44336;
+}

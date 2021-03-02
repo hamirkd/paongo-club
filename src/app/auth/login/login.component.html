@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <button mat-raised-button type="submit" class="btn btn-danger pull-center"
-                     (click)="seConnecter()" [disabled]="!userForm.valid">Se connecter</button>
+                     (click)="seConnecter()" [disabled]="!userForm.valid||on_login">Se connecter</button>
                 </form>
                 <a href="" [routerLink]="'/register'">Je n'ai pas de compte</a>
             </div>

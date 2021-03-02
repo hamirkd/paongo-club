@@ -9,9 +9,14 @@ declare interface RouteInfo {
     icon: string;
     class: string;
 }
-export const ROUTES: RouteInfo[] = [
+export const ROUTES_USER: RouteInfo[] = [
     { path: '/mes-titres', title: 'Mes Titres',  icon:'money', class: '' },
     // { path: '/my-members', title: 'Mes abonnés',  icon:'users', class: '' },
+    { path: '/user-profile', title: 'Profil utilisateur',  icon:'user', class: '' },
+];
+export const ROUTES_ADMIN: RouteInfo[] = [
+    // { path: '/my-members', title: 'Mes abonnés',  icon:'users', class: '' },
+    { path: '/my-titres', title: 'Mes Titres',  icon:'money', class: '' },
     { path: '/user-profile', title: 'Profil utilisateur',  icon:'user', class: '' },
 ];
 
@@ -26,7 +31,13 @@ export class SidebarComponent implements OnInit {
   constructor(private router: Router,private userService:UserService) { }
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    if(this.userService.isAdmin()){
+      this.menuItems = ROUTES_ADMIN.filter(menuItem => menuItem);
+    }
+    else{
+      this.menuItems = ROUTES_USER.filter(menuItem => menuItem);
+    }
+    
   }
   isMobileMenu() {
       if ($(window).width() > 991) {

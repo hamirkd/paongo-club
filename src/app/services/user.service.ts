@@ -20,6 +20,9 @@ export class UserService {
   isLoginIn() {
     return this.authGuardService.isLoginIn;
   }
+  isAdmin(){
+    return this.currentUser().role=='ADMIN';
+  }
 
   currentUser() {
     if (sessionStorage.getItem('user_access')) {
@@ -47,7 +50,7 @@ export class UserService {
   }
 
   addAccount(user: User): Observable<any> {
-    return this.http.post(this.baseUrl + 'register.php', user);
+    return this.http.post(this.baseUrl + 'user_register.php', user);
   }
 
 

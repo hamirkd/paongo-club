@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Titre } from 'app/models/titre.model';
 import { AuthGuardService } from 'app/services/auth-guard.service';
 import { TitreService } from 'app/services/titre.service';
 import { UserService } from 'app/services/user.service';
-class Titre {
-  plan: string;
-  montant: string;
-}
+
 @Component({
   selector: 'app-my-money',
   templateUrl: './my-money.component.html',
@@ -14,10 +12,14 @@ class Titre {
 export class MyMoneyComponent implements OnInit {
 
   constructor(private titreService:TitreService,private authGuardService:AuthGuardService,private userService:UserService) { }
-
+  btn_add=false;
   ngOnInit(): void {
     this.titreService.findAllTitreOfUser().subscribe(data=>{
       this._TITRE=data as Titre[];
+      if(this._TITRE.length<4)this.btn_add=true;
+      else this.btn_add=false;
+    },err=>{
+      this.btn_add=true;
     })
   }
 
@@ -35,6 +37,25 @@ export class MyMoneyComponent implements OnInit {
         return 'fa fa-battery-3';
       case 'Titan':
         return 'fa fa-battery-4';
+      default:
+        break;
+    }
+  }
+
+  getBg(plan: string) {
+    switch (plan) {
+      case 'Argent':
+        return 'bg-info';
+      case 'Or':
+        return 'bg-warning';
+      case 'Diamant':
+        return 'bg-info';
+      case 'Master':
+        return 'bg-dark';
+      case 'Champion':
+        return 'fa fa-battery-3';
+      case 'Titan':
+        return 'bg-danger';
       default:
         break;
     }
