@@ -39,6 +39,7 @@
     "moment": "2.24.0",
     "ngx-loading": "^8.0.0",
     "ngx-toastr": "^13.2.0",
+    "node-binance-api": "^0.12.5",
     "path": "^0.12.7",
     "perfect-scrollbar": "1.1.0",
     "popper.js": "1.15.0",

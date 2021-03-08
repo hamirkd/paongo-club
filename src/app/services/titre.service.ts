@@ -24,7 +24,16 @@ export class TitreService {
     return this.http.get(this.baseUrl+"/gettitres.php");
   }
   payeTitreManuelAdmin(titre:Titre):Observable<any>{
-    return this.http.post(this.baseUrl+"titre_paye_manuel_admin.php",{id:titre.id});
+    return this.http.post(this.baseUrl+"titre/titre_paye_manuel_admin.php",titre);
+  }
+  debuteTitreManuelAdmin(titre:Titre):Observable<any>{
+    return this.http.post(this.baseUrl+"titre/titre_debute_manuel_admin.php",titre);
+  }
+  supprimerTitreManuelAdmin(titre:Titre):Observable<any>{
+    return this.http.post(this.baseUrl+"titre/titre_supprimer_manuel_admin.php",titre);
+  }
+  addTitre(titre:Titre):Observable<any>{
+    return this.http.post(this.baseUrl+"titre/titre_add_manuel_admin.php",titre);
   }
 
 }

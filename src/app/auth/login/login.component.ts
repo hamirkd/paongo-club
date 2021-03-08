@@ -203,7 +203,7 @@ export class LoginComponent implements OnInit {
             this.loading=false;
             this.toastr.success('Bienvenue','Authentification');
             if(this.userService.isAdmin()){
-                this.router.navigate(["/mes-titres"]);
+                this.router.navigate(["/my-titres"]);
               }
               else{
                 this.router.navigate(["/mes-titres"]);

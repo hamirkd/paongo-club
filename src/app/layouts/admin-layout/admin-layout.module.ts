@@ -17,11 +17,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { MyTitresComponent } from './my-titres/my-titres.component';
+import { TitreAddComponent } from './titre-add/titre-add.component';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(AdminLayoutRoutes),
+    RouterModule.forChild(AdminLayoutRoutes),MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
@@ -40,6 +43,7 @@ import { MyTitresComponent } from './my-titres/my-titres.component';
     NotificationsComponent,
     UpgradeComponent,
     MyTitresComponent,
+    TitreAddComponent,
   ]
 })
 

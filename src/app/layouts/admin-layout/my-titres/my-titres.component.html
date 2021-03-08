@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="container-fluid col-md-12">
-        <a href="https://paongo-trading.com/offre-de-partenariat/" class="btn btn-danger" *ngIf="btn_add">Ajouter</a>
+        <button (click)="addTitre()" class="btn btn-danger" *ngIf="btn_add">Ajouter</button>
         <span class="btn float-right btn-danger" *ngIf="list_or_card" (click)="change_list_or_card()"><i class="fa fa-th"></i></span>
         <span class="btn float-right btn-danger" *ngIf="!list_or_card" (click)="change_list_or_card()"><i class="fa fa-list"></i></span>
         
@@ -67,8 +67,8 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLinkU">
                                 <a class="dropdown-item" href="javascript:void(0)" (click)="paye_titre_manuel(titre)">Payer</a>
-                                <a class="dropdown-item" href="javascript:void(0)">Debuter</a>
-                                <a class="dropdown-item" href="javascript:void(0)">Annuler</a>
+                                <a class="dropdown-item" href="javascript:void(0)" (click)="debute_titre_manuel(titre)">Debuter</a>
+                                <a class="dropdown-item" href="javascript:void(0)" (click)="supprimer_titre_manuel(titre)">Supprimer</a>
                             </div>
                         </td>
                     </tr>

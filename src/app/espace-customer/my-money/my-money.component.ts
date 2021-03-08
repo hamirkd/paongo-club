@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Titre } from 'app/models/titre.model';
-import { AuthGuardService } from 'app/services/auth-guard.service';
+import { BinanceService } from 'app/services/binance.service';
 import { TitreService } from 'app/services/titre.service';
-import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'app-my-money',
@@ -11,7 +10,7 @@ import { UserService } from 'app/services/user.service';
 })
 export class MyMoneyComponent implements OnInit {
 
-  constructor(private titreService:TitreService,private authGuardService:AuthGuardService,private userService:UserService) { }
+  constructor(private titreService:TitreService,private binanceService:BinanceService) { }
   btn_add=false;
   ngOnInit(): void {
     this.titreService.findAllTitreOfUser().subscribe(data=>{
@@ -68,7 +67,12 @@ export class MyMoneyComponent implements OnInit {
     }
     else return this._TITRE[i];
   }
+  
+  getBinanceAccount(){
+    console.log('click');
+    this.binanceService.getBalance();
+  }
 
-  _TITRE: Titre[] = []
+  _TITRE: Titre[] = [];
 
 }

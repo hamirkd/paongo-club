@@ -14,18 +14,19 @@ export class JwtInterceptor implements HttpInterceptor {
         const currentUser = this.authenticationService.currentUserValue;
         const isLoggedIn = currentUser && currentUser.token;
         const isApiUrl = request.url.startsWith(environment.urlapi);
-/*
+
         if (isLoggedIn) {
             // request = request.clone({ headers: request.headers.set('Authorization', 'Bearer ' + currentUser.token) });
         }
+        console.log(request.headers)
 
-        if (!request.headers.has('Content-Type')) {
-            request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
-        }
+        // if (!request.headers.has('Content-Type')) {
+        //     request = request.clone({ headers: request.headers.set('Content-Type', 'application/json') });
+        // }
         
         // request = request.clone({ headers: request.headers.set('Access-Control-Allow-Origin', '*') });
         // request = request.clone({ headers: request.headers.set('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token') });
-        request = request.clone({ headers: request.headers.set('Accept', 'application/json') });*/
+        // request = request.clone({ headers: request.headers.set('Accept', 'application/json') });
 
         return next.handle(request);
     }

@@ -18,12 +18,14 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxLoadingModule } from 'ngx-loading';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(),MatDialogModule,MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,
