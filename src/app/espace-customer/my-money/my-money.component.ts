@@ -68,11 +68,16 @@ export class MyMoneyComponent implements OnInit {
     else return this._TITRE[i];
   }
   
-  getBinanceAccount(){
+  getBinanceAccount(titre:Titre){
     console.log('click');
-    this.binanceService.getBalance();
-  }
+    this.binanceService.getMyBalance(titre.plan).subscribe(data=>{
+      this.selectTitre={plan:titre.plan,balance:data.balance?data.balance:0,balance_usd:data.balance_usd?data.balance_usd:0};
+    },err=>{
+      this.selectTitre={plan:titre.plan,balance:0,balance_usd:0};
 
+    })
+  }
+  selectTitre:{plan,balance,balance_usd};
   _TITRE: Titre[] = [];
 
 }

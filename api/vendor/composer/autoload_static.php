@@ -7,8 +7,13 @@ namespace Composer\Autoload;
 class ComposerStaticInit26b896f048f2fac1e5bea53f2837a040
 {
     public static $files = array (
+        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
+        '972fda704d680a3a53c68e34e193cb22' => __DIR__ . '/..' . '/react/promise-timer/src/functions_include.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '3be16222a6efa6dd226a219eaaff823b' => __DIR__ . '/..' . '/ratchet/pawl/src/functions_include.php',
         '0ccdf99b8f62f02c52cba55802e0c2e7' => __DIR__ . '/..' . '/zircote/swagger-php/src/functions.php',
     );
 
@@ -19,9 +24,29 @@ class ComposerStaticInit26b896f048f2fac1e5bea53f2837a040
             'Symfony\\Component\\Yaml\\' => 23,
             'Symfony\\Component\\Finder\\' => 25,
         ),
+        'R' => 
+        array (
+            'React\\Stream\\' => 13,
+            'React\\Socket\\' => 13,
+            'React\\Promise\\Timer\\' => 20,
+            'React\\Promise\\' => 14,
+            'React\\EventLoop\\' => 16,
+            'React\\Dns\\' => 10,
+            'React\\Cache\\' => 12,
+            'Ratchet\\RFC6455\\' => 16,
+            'Ratchet\\Client\\' => 15,
+        ),
+        'P' => 
+        array (
+            'Psr\\Http\\Message\\' => 17,
+        ),
         'O' => 
         array (
             'OpenApi\\' => 8,
+        ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
         ),
         'F' => 
         array (
@@ -47,9 +72,53 @@ class ComposerStaticInit26b896f048f2fac1e5bea53f2837a040
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
         ),
+        'React\\Stream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/stream/src',
+        ),
+        'React\\Socket\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/socket/src',
+        ),
+        'React\\Promise\\Timer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/promise-timer/src',
+        ),
+        'React\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/promise/src',
+        ),
+        'React\\EventLoop\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/event-loop/src',
+        ),
+        'React\\Dns\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/dns/src',
+        ),
+        'React\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/cache/src',
+        ),
+        'Ratchet\\RFC6455\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ratchet/rfc6455/src',
+        ),
+        'Ratchet\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ratchet/pawl/src',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
         'OpenApi\\' => 
         array (
             0 => __DIR__ . '/..' . '/zircote/swagger-php/src',
+        ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
         ),
         'Firebase\\JWT\\' => 
         array (
@@ -65,7 +134,19 @@ class ComposerStaticInit26b896f048f2fac1e5bea53f2837a040
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'E' => 
+        array (
+            'Evenement' => 
+            array (
+                0 => __DIR__ . '/..' . '/evenement/evenement/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
+        'Binance\\API' => __DIR__ . '/..' . '/jaggedsoft/php-binance-api/php-binance-api.php',
+        'Binance\\RateLimiter' => __DIR__ . '/..' . '/jaggedsoft/php-binance-api/php-binance-api-rate-limiter.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
@@ -74,6 +155,7 @@ class ComposerStaticInit26b896f048f2fac1e5bea53f2837a040
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit26b896f048f2fac1e5bea53f2837a040::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit26b896f048f2fac1e5bea53f2837a040::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit26b896f048f2fac1e5bea53f2837a040::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit26b896f048f2fac1e5bea53f2837a040::$classMap;
 
         }, null, ClassLoader::class);

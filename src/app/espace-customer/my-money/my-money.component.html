@@ -1,8 +1,9 @@
 <div class="main-content">
     <div class="container-fluid col-md-12">
-        <div class="col-lg-6">
         <div class="row">
-                <div class="col-lg-6 col-md-3 col-sm-6" *ngFor="let titre of _TITRE" (click)="getBinanceAccount()">
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-6 col-md-3 col-sm-6" *ngFor="let titre of _TITRE" (click)="getBinanceAccount(titre)">
                     <div class="card {{getBg(titre.plan)}}" style="height: 12rem;">
                         <div class="card-header">
                             <h4 class="card-title">{{titre.plan}}
@@ -21,11 +22,31 @@
                 <div class="col-lg-6 col-md-3 col-sm-6" *ngIf="btn_add">
                     <a class="card btn btn-danger" href="https://paongo-trading.com/offre-de-partenariat/">
                         <a class="card-body btn btn-danger" href="https://paongo-trading.com/offre-de-partenariat/">
-                            <a href="https://paongo-trading.com/offre-de-partenariat/" class="btn btn-danger" *ngIf="btn_add">Ajouter</a>
+                            <a href="https://paongo-trading.com/offre-de-partenariat/" class="btn btn-danger"
+                                *ngIf="btn_add">Ajouter</a>
                         </a>
                     </a>
                 </div>
             </div>
         </div>
+        <div class="col-lg-6" >
+            <div class="row card" *ngIf="selectTitre" style="height: 12rem;">
+                <div class="row">
+                <div class="col-lg-6 col-md-3 col-sm-4">
+                    <label class="col-lg-12">Titre </label>
+                    <label class="col-lg-12" style="font-size: xxx-large;">{{selectTitre.plan}}</label>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-4">
+                    <label class="col-lg-12">Balance</label>
+                    <label class="col-lg-12" style="font-size: xx-large;">{{selectTitre.balance?selectTitre.balance.toFixed(6):0}}BTC</label>
+                    <label class="col-lg-12" style="font-size: xx-large;">&#8776;{{selectTitre.balance_usd?selectTitre.balance_usd.toFixed(2):0}}$</label>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-4">
+
+                </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 </div>

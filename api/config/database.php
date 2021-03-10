@@ -1,11 +1,12 @@
 <?php
 // used to get mysql database connection
-class DatabaseService{
 
-    private $db_host = "localhost";
-    private $db_name = "paongo-trading";
-    private $db_user = "root";
-    private $db_password = "";
+class DatabaseService{
+    
+    private $db_host = "185.98.131.149";
+    private $db_name = "paong1521537";
+    private $db_user = "paong1521537";
+    private $db_password = "1zoboq0oo2";
     private $connection;
 
     public function getConnection(){

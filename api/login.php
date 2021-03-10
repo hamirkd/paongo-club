@@ -4,12 +4,12 @@ include_once './config/database.php';
 require "vendor/autoload.php";
 use \Firebase\JWT\JWT;
 
+
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-
 
 $email = '';
 $password = '';
@@ -18,21 +18,19 @@ $databaseService = new DatabaseService();
 $conn = $databaseService->getConnection();
 
 
-
 $data = json_decode(file_get_contents("php://input"));
 
-//$email = $data->email;
-//$password = $data->password;
-$email = $_POST['email'];
-$password = $_POST['password'];
+$email = $data->email;
+$password = $data->password;
 
 $table_name = 'users';
 
-$query = "SELECT id, first_name, last_name, password FROM " . $table_name . " WHERE email = ? LIMIT 0,1";
+$query = "SELECT id, first_name, last_name, password,role FROM " . $table_name . " WHERE email = ? LIMIT 0,1";
 
 $stmt = $conn->prepare( $query );
 $stmt->bindParam(1, $email);
 $stmt->execute();
+
 $num = $stmt->rowCount();
 
 if($num > 0){
@@ -40,6 +38,7 @@ if($num > 0){
     $id = $row['id'];
     $firstname = $row['first_name'];
     $lastname = $row['last_name'];
+    $role = $row['role'];
     $password2 = $row['password'];
 
     if(password_verify($password, $password2))
@@ -69,8 +68,10 @@ if($num > 0){
         echo json_encode(
             array(
                 "message" => "Successful login.",
-                "jwt" => $jwt,
+                "token" => $jwt,
                 "email" => $email,
+                "role" => $role,
+                "id"=>$id,
                 "expireAt" => $expire_claim
             ));
     }
@@ -79,5 +80,8 @@ if($num > 0){
         http_response_code(401);
         echo json_encode(array("message" => "Login failed.", "password" => $password));
     }
+    
+
 }
+$conn=null;
 ?>
