@@ -12,6 +12,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { AuthRoutes } from './auth.routing';
 import { RegisterComponent } from './register/register.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { RegisterComponent } from './register/register.component';
   declarations: [
     LoginComponent,
     RegisterComponent,
-    AuthComponent
+    AuthComponent,
+    PasswordResetComponent
   ]
 })
 

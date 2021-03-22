@@ -48,9 +48,9 @@ export class RegisterComponent implements OnInit {
 
     constructor(public location: Location, private router: Router, private toasterService: ToastrService,
         private userService: UserService) { }
-        on_register=false;
+    on_register = false;
     ngOnInit() {
-        
+
         this.changeImg();
         const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
@@ -195,14 +195,17 @@ export class RegisterComponent implements OnInit {
         return true;
     };
     registerUser() {
-        this.on_register=true;
+        this.on_register = true;
+        this.user.name = this.user.last_name + " " + this.user.first_name;
         this.userService.addAccount(this.user).subscribe(data => {
             // Message de connexion de compte
+            this.on_register = false;
             switch (data.status) {
                 case 400:
                     this.toasterService.error("Veuillez vérifier les informations du compte");
                     break;
                 case 200:
+                case 201:
                     this.toasterService.success("Votre compte a été crée");
                     setTimeout(() => {
                         this.toasterService.success("Vous serez rediriger vers la page de connexion");
@@ -215,12 +218,17 @@ export class RegisterComponent implements OnInit {
                 default:
                     break;
             }
-            this.on_register=true;
 
         }, err => {
-            console.log(err);
-            this.on_register=true;
-            this.toasterService.error(err.message, 'Création de compte')
+            this.on_register = false;
+            let error = JSON.parse(err.error);
+            if(error.telephone)
+            this.toasterService.error(error.telephone, 'Création de compte')
+            else if(error.password)
+            this.toasterService.error(error.password, 'Création de compte')
+            else 
+            this.toasterService.error(error, 'Création de compte')
+            
             // Message de non création de compte
         })
     }

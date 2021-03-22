@@ -47,10 +47,12 @@ export class AuthComponent implements OnInit {
       });
       this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
            elemMainPanel.scrollTop = 0;
+           if(elemSidebar)
            elemSidebar.scrollTop = 0;
       });
       if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
           let ps = new PerfectScrollbar(elemMainPanel);
+          if(elemSidebar)
           ps = new PerfectScrollbar(elemSidebar);
       }
 
