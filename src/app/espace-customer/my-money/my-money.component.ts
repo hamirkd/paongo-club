@@ -92,6 +92,7 @@ export class MyMoneyComponent implements OnInit {
     this.binanceService.getMyBalance(titre.titre).subscribe(data => {
       this.selectTitre = { titre: titre.titre, balance: data && data.balance ? data.balance : 0, balance_usd: data && data.balance_usd ? data.balance_usd : 0 };
       this.valeur_titre_achete=this.selectTitre.balance_usd/this.nombre_titre_achete+250;
+      this.dividante_titre_achete = (this.selectTitre.balance_usd-this.nombre_titre_achete*this.montant_titre_achete)/(2*this.nombre_titre_achete)
     }, err => {
 
       this.selectTitre = { titre: titre.titre, balance: 0, balance_usd: 0 };
@@ -99,17 +100,24 @@ export class MyMoneyComponent implements OnInit {
 
     })
     this.titreService.nombre_titre_acheter(titre.titre).subscribe(data=>{
-      let data2 = data as {nombre,montant}
+      let data2 = data as {nombre,montant,limit}
       this.nombre_titre_achete=data2.nombre as number;
-      // this.valeur_titre_achete=data2.montant as number;
+      this.montant_titre_achete=data2.montant as number;
+      this.limit_titre_achete=data2.limit as number;
 
     },err=>{
       this.nombre_titre_achete=0;
       this.valeur_titre_achete=0;
+      this.dividante_titre_achete=0;
+      this.montant_titre_achete=0;
+      this.limit_titre_achete=0;
     })
   }
   nombre_titre_achete=0;
   valeur_titre_achete=0;
+  dividante_titre_achete=0;
+  montant_titre_achete=0;
+  limit_titre_achete=0;
   click_add=false;
   addTitre() {
     if(this.click_add)return;

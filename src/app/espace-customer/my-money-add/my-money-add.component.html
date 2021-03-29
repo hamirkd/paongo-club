@@ -23,10 +23,10 @@
                 </mat-form-field>
             </div>
             <div class="col-lg-8 col-md-8">
-                <button class="btn btn-sm {{choix_titre==titre?'btn-danger':'btn-outline-danger'}} col-md-3" (click)="choix_titre=titre" *ngFor="let titre of _TITRE">{{titre.nom}}</button>
+                <button class="btn btn-sm {{choix_titre==titre?'btn-danger':'btn-outline-danger'}} col-md-3" (click)="choix_titre_(titre)" *ngFor="let titre of _TITRE">{{titre.nom}}</button>
             </div>
             <div class="col-lg-4 col-md-2" style="text-align: center;align-self: center;font-size: xxx-large;">
-                {{choix_titre?choix_titre.montant:'0'}}$
+                {{valeur_titre_achete?valeur_titre_achete.toFixed(1):'0'}}$
             </div>
         </div>
         <div class="row" style="padding-top: 5%;">

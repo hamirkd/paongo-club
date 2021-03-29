@@ -6,6 +6,7 @@ import { UserService } from 'app/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import {MatDialog} from '@angular/material/dialog';
 import { TitreAddComponent } from '../titre-add/titre-add.component';
+import { BinanceService } from 'app/services/binance.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { TitreAddComponent } from '../titre-add/titre-add.component';
 export class MyTitresComponent implements OnInit {
 
 
-  constructor(public dialog: MatDialog,private toasterService: ToastrService, private titreService: TitreService, private authGuardService: AuthGuardService, private userService: UserService) { }
+  constructor(private binanceService:BinanceService,public dialog: MatDialog,private toasterService: ToastrService, private titreService: TitreService, private authGuardService: AuthGuardService, private userService: UserService) { }
   btn_add = true;
   ngOnInit(): void {
     this.getTitreListe();
@@ -25,8 +26,11 @@ export class MyTitresComponent implements OnInit {
   change_list_or_card() {
     this.list_or_card = !this.list_or_card;
     localStorage.setItem("list_or_card", JSON.stringify(this.list_or_card));
-  }
+    if(!this.list_or_card){
 
+    }
+  }
+e
   addTitre() {
     const dialogRef = this.dialog.open(TitreAddComponent,{
       width: '600px',
@@ -153,4 +157,27 @@ export class MyTitresComponent implements OnInit {
       this.getTitreListe();
     })
   }
+  
+  choix_titre_(titre) {
+    this.titreService.nombre_titre_acheter(titre.nom).subscribe(data => {
+      let data2 = data as { nombre, montant, limit }
+      this.nombre_titre_achete = data2.nombre as number;
+      this.limit_titre_achete = data2.limit as number;
+
+      this.binanceService.getMyBalance(titre.nom).subscribe(data => {
+        let selectTitre = { titre: titre.nom, balance: data && data.balance ? data.balance : 0, balance_usd: data && data.balance_usd ? data.balance_usd : 0 };
+        this.valeur_titre_achete = selectTitre.balance_usd / this.nombre_titre_achete + 250;
+      }, err => {
+        this.valeur_titre_achete = 0;
+      })
+
+    }, err => {
+      this.nombre_titre_achete = 0;
+      this.valeur_titre_achete = 0;
+      this.limit_titre_achete = 0;
+    })
+  }
+  nombre_titre_achete = 0;
+  valeur_titre_achete = 0;
+  limit_titre_achete = 0;
 }
