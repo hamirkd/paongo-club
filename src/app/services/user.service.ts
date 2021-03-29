@@ -32,25 +32,38 @@ export class UserService {
   }
   logout() {
     this.authGuardService.logout();
+    this.http.post(this.baseUrl+'api/auth/logout',{});
   }
 
   loginUserByLoginAndPassword(login: string, password: string): Observable<any> {
-    return this.http.post(this.baseUrl + 'login.php', { email: login, password: password });
+    return this.http.post(this.baseUrl + 'api/auth/login', { email: login, password: password });
   }
 
   findUserById(): Observable<any> {
-    let id;
-    if (this.currentUser()) id = this.currentUser().id;
-    return this.http.get(this.baseUrl + "get_user.php?id=" + id);
+    return this.http.get(this.baseUrl + "api/auth/user-profile");
   }
   updateUser(user: User): Observable<any> {
-    let id;
-    if (this.currentUser()) id = this.currentUser().id;
-    return this.http.post(this.baseUrl + "update_user.php?id=" + id, user);
+    console.log(user)
+    return this.http.put(this.baseUrl + "api/auth/update", user);
   }
 
   addAccount(user: User): Observable<any> {
-    return this.http.post(this.baseUrl + 'user_register.php', user);
+    console.log(user);
+    return this.http.post(this.baseUrl + 'api/auth/register', user);
+  }
+
+  
+  sendPasswordLinkReset(email: string): Observable<any> {
+    return this.http.post(this.baseUrl + 'api/password-forget', { email: email });
+  }
+  
+  verifyValidToken(token: string): Observable<any> {
+    return this.http.post(this.baseUrl + 'api/password-verify', { token: token });
+  }
+  resetPassword(user: User): Observable<any> {
+    console.log(user)
+    return this.http.post(this.baseUrl + 'api/password-init', { email:user.email,
+    password:user.password,password_confirmation:user.password_confirmation });
   }
 
 

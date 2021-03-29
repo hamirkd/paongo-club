@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Titre } from 'app/models/titre.model';
 import { BinanceService } from 'app/services/binance.service';
 import { TitreService } from 'app/services/titre.service';
+import { ToastrService } from 'ngx-toastr';
+import { MyMoneyAddComponent } from '../my-money-add/my-money-add.component';
 
 @Component({
   selector: 'app-my-money',
@@ -10,20 +13,31 @@ import { TitreService } from 'app/services/titre.service';
 })
 export class MyMoneyComponent implements OnInit {
 
-  constructor(private titreService:TitreService,private binanceService:BinanceService) { }
-  btn_add=false;
+  constructor(public dialog: MatDialog, private titreService: TitreService,
+    private binanceService: BinanceService, private toastrService: ToastrService) { }
+  btn_add = false;
   ngOnInit(): void {
-    this.titreService.findAllTitreOfUser().subscribe(data=>{
-      this._TITRE=data as Titre[];
-      if(this._TITRE.length<4)this.btn_add=true;
-      else this.btn_add=false;
-    },err=>{
-      this.btn_add=true;
+    this.getListeMyMoney();
+  }
+
+  getListeMyMoney() {
+    this.titreService.findAllTitreOfUser().subscribe(data => {
+      let data1:string=JSON.stringify(data as Titre[])
+      this._TITRE  = Object.keys(data).map(function(personNamedIndex){
+        let items = data[personNamedIndex];
+        return items;
+      })
+      
+      if (this._TITRE.length < 4) this.btn_add = true;
+      else this.btn_add = false;
+    }, err => {
+      this.btn_add = true;
+      console.log(err);
     })
   }
 
-  getIcon(plan: string) {
-    switch (plan) {
+  getIcon(titre: string) {
+    switch (titre) {
       case 'Argent':
         return 'fa fa-money';
       case 'Or':
@@ -41,8 +55,8 @@ export class MyMoneyComponent implements OnInit {
     }
   }
 
-  getBg(plan: string) {
-    switch (plan) {
+  getBg(titre: string) {
+    switch (titre) {
       case 'Argent':
         return 'bg-info';
       case 'Or':
@@ -67,17 +81,49 @@ export class MyMoneyComponent implements OnInit {
     }
     else return this._TITRE[i];
   }
-  
-  getBinanceAccount(titre:Titre){
-    console.log('click');
-    this.binanceService.getMyBalance(titre.plan).subscribe(data=>{
-      this.selectTitre={plan:titre.plan,balance:data.balance?data.balance:0,balance_usd:data.balance_usd?data.balance_usd:0};
-    },err=>{
-      this.selectTitre={plan:titre.plan,balance:0,balance_usd:0};
+
+  getBinanceAccount(titre: Titre) {
+
+    if (titre.etat_paiement.toLocaleLowerCase() == 'non_paye') {
+      this.toastrService.warning("Vous devez payé ce titre");
+      return;
+    }
+
+    this.binanceService.getMyBalance(titre.titre).subscribe(data => {
+      this.selectTitre = { titre: titre.titre, balance: data && data.balance ? data.balance : 0, balance_usd: data && data.balance_usd ? data.balance_usd : 0 };
+      this.valeur_titre_achete=this.selectTitre.balance_usd/this.nombre_titre_achete+250;
+    }, err => {
+
+      this.selectTitre = { titre: titre.titre, balance: 0, balance_usd: 0 };
+      this.valeur_titre_achete=0;
 
     })
+    this.titreService.nombre_titre_acheter(titre.titre).subscribe(data=>{
+      let data2 = data as {nombre,montant}
+      this.nombre_titre_achete=data2.nombre as number;
+      // this.valeur_titre_achete=data2.montant as number;
+
+    },err=>{
+      this.nombre_titre_achete=0;
+      this.valeur_titre_achete=0;
+    })
   }
-  selectTitre:{plan,balance,balance_usd};
+  nombre_titre_achete=0;
+  valeur_titre_achete=0;
+  click_add=false;
+  addTitre() {
+    if(this.click_add)return;
+    this.click_add=true
+    const dialogRef = this.dialog.open(MyMoneyAddComponent, {
+      width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.getListeMyMoney();
+      this.click_add=false;
+    });
+  }
+
+  selectTitre: { titre, balance, balance_usd };
   _TITRE: Titre[] = [];
 
 }

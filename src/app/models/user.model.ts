@@ -1,11 +1,13 @@
 export class User{
     id:string;
+    name:string;
     first_name:string;
     last_name:string;
     username:string;
     email:string;
     telephone:string;
     password:string;
+    password_confirmation?:string;
     pictureUrl:string;
     status:"ENABLE"|"DISABLE"="DISABLE";
     token?: string;

@@ -1,0 +1,39 @@
+<div class="">
+    <h4 class="card-title"> Ajouter une souscription à un titre
+    </h4>
+<div class="" style="">
+    <form #titreForm="ngForm">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Nom et prénom" type="text"
+                    [(ngModel)]="titre.nomprenom" name="nomprenom" [disabled]="true">
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Téléphone" type="tel"
+                    [(ngModel)]="titre.telephone" name="telephone" [disabled]="true">
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="E-mail" type="email"
+                    [(ngModel)]="titre.emailadresse" name="emailadresse" [disabled]="true">
+                </mat-form-field>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <button class="btn btn-sm {{choix_titre==titre?'btn-danger':'btn-outline-danger'}} col-md-3" (click)="choix_titre=titre" *ngFor="let titre of _TITRE">{{titre.nom}}</button>
+            </div>
+            <div class="col-lg-4 col-md-2" style="text-align: center;align-self: center;font-size: xxx-large;">
+                {{choix_titre?choix_titre.montant:'0'}}$
+            </div>
+        </div>
+        <div class="row" style="padding-top: 5%;">
+            <div class="col-lg-6 col-md-3 col-sm-6"><button class="pull-left btn btn-sm btn-danger" [disabled]="on_register" (click)="registertitre()">Valider</button></div>
+            <div class="col-lg-6 col-md-3 col-sm-6"><button class="pull-right btn btn-sm" (click)="onNoClick()">Annuler</button></div>
+        </div>
+    </form>
+</div>
+
+</div>

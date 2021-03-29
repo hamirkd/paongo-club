@@ -6,5 +6,7 @@
 export const environment = {
   production: false,
   // urlapi:'http://127.0.0.1:8080',
-  urlapi:'http://api.paongo-trading.com'
+  // urlapi:'http://api.paongo-trading.com'
+  urlapi:'http://v2.api.paongo-trading.com'
+  // urlapi:'http://127.0.0.1:8000'
 };

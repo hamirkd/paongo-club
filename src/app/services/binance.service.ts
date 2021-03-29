@@ -13,8 +13,8 @@ export class BinanceService {
 
   constructor(public http: HttpClient) { }
 
-  getMyBalance(plan:string):Observable<any>{
-    return this.http.get(this.baseUrl+"binance/balance.php?plan="+plan);
+  getMyBalance(titre:string):Observable<any>{
+    return this.http.get(this.baseUrl+"api/binance/"+titre);
   }
 
   // getBalance() {

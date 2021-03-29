@@ -7,10 +7,10 @@
         <div class="col-lg-12" *ngIf="!list_or_card">
             <div class="row">
                 <div class="col-lg-4 col-md-3 col-sm-4" *ngFor="let titre of _TITRE">
-                    <div class="card {{getBg(titre.plan)}}" style="min-height: 12rem;">
+                    <div class="card {{getBg(titre.titre)}}" style="min-height: 12rem;">
                         <div class="card-header">
-                            <h4 class="card-title">{{titre.plan}}
-                                <i class="{{getIcon(titre.plan)}}"></i>
+                            <h4 class="card-title">{{titre.titre}}
+                                <i class="{{getIcon(titre.titre)}}"></i>
                             </h4>
                         </div>
                         <div class="card-body">
@@ -40,7 +40,6 @@
                         <th scope="col">Titre</th>
                         <th scope="col">Montant</th>
                         <th scope="col">Status Paiement</th>
-                        <th scope="col">Etat Investissement</th>
                         <th scope="col">Date de Mise à jour</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -52,14 +51,13 @@
                         <td>{{titre.nomprenom}}</td>
                         <td>{{titre.emailadresse}}</td>
                         <td>{{titre.telephone}}</td>
-                        <td>{{titre.plan}}</td>
+                        <td>{{titre.titre}}</td>
                         <td>{{titre.montant}}$</td>
                         <td>
-                            <label class="paiement-status-non-paye" *ngIf="titre.etat_paiement=='NON_PAYEE'">{{'Non Payé'}}</label>
-                            <label class="paiement-status-paye" *ngIf="titre.etat_paiement!='NON_PAYEE'">{{'Payé'}}</label>
+                            <label class="paiement-status-non-paye" *ngIf="titre.etat_paiement=='NON_PAYE'">{{'Non Payé'}}</label>
+                            <label class="paiement-status-paye" *ngIf="titre.etat_paiement!='NON_PAYE'">{{'Payé'}}</label>
                         </td>
-                        <td>{{titre.etat_investissement}}</td>
-                        <td>{{titre.date_miseajour}}</td>
+                        <td>{{titre.updated_at|date}}</td>
                         <td>
                             <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLinkU"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-sm">

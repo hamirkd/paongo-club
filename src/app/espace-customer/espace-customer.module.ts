@@ -13,12 +13,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { EspaceCustomerRoutes } from './espace-customer.routing';
 import { ComponentsModule } from 'app/components/components.module';
+import { MyMoneyAddComponent } from './my-money-add/my-money-add.component';
 
 
 @NgModule({
   declarations: [
     MyMoneyComponent, 
-    EspaceCustomerComponent
+    EspaceCustomerComponent, MyMoneyAddComponent
   ],
   imports: [
     CommonModule,

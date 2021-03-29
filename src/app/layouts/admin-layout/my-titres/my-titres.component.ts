@@ -36,8 +36,8 @@ export class MyTitresComponent implements OnInit {
       this.getTitreListe();
     });
   }
-  getIcon(plan: string) {
-    switch (plan) {
+  getIcon(titre: string) {
+    switch (titre) {
       case 'Argent':
         return 'fa fa-money';
       case 'Or':
@@ -55,8 +55,8 @@ export class MyTitresComponent implements OnInit {
     }
   }
 
-  getBg(plan: string) {
-    switch (plan) {
+  getBg(titre: string) {
+    switch (titre) {
       case 'Argent':
         return 'bg-info';
       case 'Or':
@@ -78,7 +78,11 @@ export class MyTitresComponent implements OnInit {
       this.list_or_card = JSON.parse(localStorage.getItem("list_or_card"));
     }
     this.titreService.findAllTitreOfUsers().subscribe(data => {
-      this._TITRE = data as Titre[];
+      
+      this._TITRE  = Object.keys(data).map(function(personNamedIndex){
+        let items = data[personNamedIndex];
+        return items;
+      })
     }, err => {
     })
   }
@@ -105,6 +109,7 @@ export class MyTitresComponent implements OnInit {
       }
     })
   }
+  
   
   supprimer_titre_manuel(titre: Titre) {
     this.titreService.supprimerTitreManuelAdmin(titre).subscribe(data => {

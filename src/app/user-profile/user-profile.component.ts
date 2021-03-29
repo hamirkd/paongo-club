@@ -15,6 +15,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.userService.findUserById().subscribe(data=>{
       this.user = data as User;
+      console.log(this.user)
     },err=>{
       //message d'erreur
       console.log(err);
