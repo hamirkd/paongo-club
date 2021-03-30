@@ -42,6 +42,19 @@ export class UserService {
   findUserById(): Observable<any> {
     return this.http.get(this.baseUrl + "api/auth/user-profile");
   }
+
+  findAllUsers(): Observable<any>{
+    return this.http.get(this.baseUrl + "api/auth/findAllUser");
+  }
+
+  deleteUser(user:User): Observable<any>{
+    return this.http.delete(this.baseUrl + "api/auth/deleteUser/"+user.id);
+  }
+
+  bloquerUser(user:User): Observable<any>{
+    return this.http.get(this.baseUrl + "api/auth/bloquerUser/"+user.id);
+  }
+
   updateUser(user: User): Observable<any> {
     console.log(user)
     return this.http.put(this.baseUrl + "api/auth/update", user);

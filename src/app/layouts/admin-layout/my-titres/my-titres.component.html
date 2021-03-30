@@ -6,22 +6,22 @@
         
         <div class="col-lg-12" *ngIf="!list_or_card">
             <div class="row">
-                <div class="col-lg-4 col-md-3 col-sm-4" *ngFor="let titre of _TITRE">
-                    <div class="card {{getBg(titre.titre)}}" style="min-height: 12rem;">
+                <div class="col-lg-4 col-md-3 col-sm-4" *ngFor="let titre of titreModels">
+                    <div class="card {{getBg(titre.nom)}}">
                         <div class="card-header">
-                            <h4 class="card-title">{{titre.titre}}
-                                <i class="{{getIcon(titre.titre)}}"></i>
+                            <h4 class="card-title">{{titre.nom}}
+                                <i class="{{getIcon(titre.nom)}}"></i>
                             </h4>
                         </div>
-                        <div class="card-body">
-                            <p>{{titre.nomprenom}}</p>
-                            <p>{{titre.emailadresse}}</p>
-                            <p>{{titre.telephone}}</p>
-                            <p>{{titre.montant}}$</p>
+                        <div class="card-body" [ngClass]="{'bloquer':titre.bloquer}">
+                            <p>{{titre.montant}}</p>
+                            <p>{{titre.nombre_titre_achete}}/{{titre.limit_titre_achete}}</p>
+                            <p>{{titre.balance?titre.balance.toFixed(7):0}}BTC</p>
+                            <p>{{titre.balance_usd?titre.balance_usd.toFixed(2):0}}$</p>
+                            <p>{{titre.valeur_titre_achete?titre.valeur_titre_achete.toFixed(2):0}}$</p>
                             <hr>
                         </div>
-                        <div class="card-footer" class="row">
-                            <div class="col-lg-6 col-md-3 col-sm-6">{{titre.etat_paiement|lowercase}}</div>
+                        <div class="card-footer">
                             <div class="col-lg-6 col-md-3 col-sm-6">{{titre.date_miseajour}}</div>
                         </div>
                     </div>
@@ -45,10 +45,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let titre of _TITRE">
+                    <tr *ngFor="let titre of _TITRE;let i=index">
 
-                        <td>{{titre.id}}</td>
-                        <td>{{titre.nomprenom}}</td>
+                        <td>{{i+1}}</td>
+                        <td>{{titre.nomprenom|uppercase}}</td>
                         <td>{{titre.emailadresse}}</td>
                         <td>{{titre.telephone}}</td>
                         <td>{{titre.titre}}</td>

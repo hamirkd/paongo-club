@@ -18,6 +18,9 @@ export const ROUTES_ADMIN: RouteInfo[] = [
     // { path: '/my-members', title: 'Mes abonnés',  icon:'users', class: '' },
     { path: '/my-titres', title: 'Mes Titres',  icon:'money', class: '' },
     { path: '/user-profile', title: 'Profil utilisateur',  icon:'user', class: '' },
+    { path: '/users-list', title: 'Liste des utilisateurs',  icon:'users', class: '' },
+    { path: '/titres-list', title: 'Liste des titres',  icon:'file-o', class: '' },
+    
 ];
 
 @Component({

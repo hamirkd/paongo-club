@@ -21,14 +21,19 @@
                               </div>
                           </div>
                           <div class="row">
-                              <div class="col-md-6">
+                              <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
                                   <input matInput placeholder="Prénom(s)" type="text" [(ngModel)]="user.first_name" name="first_name">
                                 </mat-form-field>
                               </div>
-                              <div class="col-md-6">
+                              <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
                                   <input matInput placeholder="Nom" type="text" [(ngModel)]="user.last_name" name="last_name">
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input matInput placeholder="Numéro CNIB" type="text" [(ngModel)]="user.cnib" name="cnib">
                                 </mat-form-field>
                               </div>
                           </div>

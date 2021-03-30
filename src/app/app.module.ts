@@ -21,6 +21,12 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+
+// the second parameter 'fr' is optional
+registerLocaleData(localeFr, 'fr');
+
 
 @NgModule({
   imports: [

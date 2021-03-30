@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import {MatDialog} from '@angular/material/dialog';
 import { TitreAddComponent } from '../titre-add/titre-add.component';
 import { BinanceService } from 'app/services/binance.service';
+import { TitreModelService } from 'app/services/titre-model.service';
+import { TitreModel } from 'app/models/titre.model.model';
 
 
 @Component({
@@ -17,17 +19,20 @@ import { BinanceService } from 'app/services/binance.service';
 export class MyTitresComponent implements OnInit {
 
 
-  constructor(private binanceService:BinanceService,public dialog: MatDialog,private toasterService: ToastrService, private titreService: TitreService, private authGuardService: AuthGuardService, private userService: UserService) { }
+  constructor(private binanceService:BinanceService,public dialog: MatDialog,
+    private toasterService: ToastrService, private titreService: TitreService, 
+    private titreModelService:TitreModelService) { }
   btn_add = true;
   ngOnInit(): void {
     this.getTitreListe();
   }
   list_or_card = true;// if it's true, it shows list
+  
   change_list_or_card() {
     this.list_or_card = !this.list_or_card;
     localStorage.setItem("list_or_card", JSON.stringify(this.list_or_card));
     if(!this.list_or_card){
-
+      this.findAllTitre();
     }
   }
 e
@@ -78,6 +83,7 @@ e
     }
   }
   getTitreListe() {
+    this.findAllTitre();
     if (localStorage.getItem("list_or_card")) {
       this.list_or_card = JSON.parse(localStorage.getItem("list_or_card"));
     }
@@ -87,6 +93,7 @@ e
         let items = data[personNamedIndex];
         return items;
       })
+      this._TITRE.sort((a,b) => a.nomprenom.localeCompare(b.nomprenom));
     }, err => {
     })
   }
@@ -157,27 +164,36 @@ e
       this.getTitreListe();
     })
   }
-  
-  choix_titre_(titre) {
-    this.titreService.nombre_titre_acheter(titre.nom).subscribe(data => {
-      let data2 = data as { nombre, montant, limit }
-      this.nombre_titre_achete = data2.nombre as number;
-      this.limit_titre_achete = data2.limit as number;
+  titreModels:TitreModel[];
 
-      this.binanceService.getMyBalance(titre.nom).subscribe(data => {
-        let selectTitre = { titre: titre.nom, balance: data && data.balance ? data.balance : 0, balance_usd: data && data.balance_usd ? data.balance_usd : 0 };
-        this.valeur_titre_achete = selectTitre.balance_usd / this.nombre_titre_achete + 250;
+  findAllTitre(){
+    this.titreModelService.findAllTitres().subscribe(data=>{
+      this.titreModels = data as TitreModel[];
+      for(let titreModel of this.titreModels){
+        this.getInformation(titreModel);
+      }
+    })
+  }
+  getInformation(titreModel:TitreModel) {
+    
+    this.titreService.nombre_titre_acheter(titreModel.nom).subscribe(data => {
+      let data2 = data as { nombre, montant, limit }
+      titreModel['nombre_titre_achete'] = data2.nombre as number;
+      titreModel['limit_titre_achete'] = data2.limit as number;
+
+      this.binanceService.getMyBalance(titreModel.id).subscribe(data => {
+        
+        titreModel['balance'] = data.balance ? data.balance : 0;
+        titreModel['balance_usd'] = data.balance_usd ? data.balance_usd : 0;
+        titreModel['valeur_titre_achete'] = titreModel['balance_usd'] / titreModel['nombre_titre_achete'] + 250;
+        
       }, err => {
-        this.valeur_titre_achete = 0;
+        
       })
 
     }, err => {
-      this.nombre_titre_achete = 0;
-      this.valeur_titre_achete = 0;
-      this.limit_titre_achete = 0;
+      
     })
   }
-  nombre_titre_achete = 0;
-  valeur_titre_achete = 0;
-  limit_titre_achete = 0;
+  
 }

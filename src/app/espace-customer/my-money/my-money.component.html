@@ -30,15 +30,15 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="row card" *ngIf="selectTitre" style="height: 13rem;">
+                <div class="row card" *ngIf="selectTitre">
                     <div class="row">
                         <div class="col-lg-6 col-md-3 col-sm-4">
                             <label class="col-lg-12">Titre </label>
                             <label class="col-lg-12" style="font-size: x-large;">{{selectTitre.titre }}</label>
                             <label class="col-lg-12" style="font-size: x-large;">$</label>
-                            <label class="col-lg-12" style="">Nombre de titre</label>
-                            <label class="col-lg-12" style="">Valeur du titre</label>
-                            <label class="col-lg-12" style="">Dividente du club</label>
+                            <label class="col-lg-12">Nombre de titre</label>
+                            <label class="col-lg-12">Valeur du titre</label>
+                            <label class="col-lg-12">Dividente du club</label>
                         </div>
                         <div class="col-lg-6 col-md-3 col-sm-4">
                             <label class="col-lg-12">Balance</label>
@@ -46,10 +46,10 @@
                                 style="font-size: x-large;">{{selectTitre.balance?selectTitre.balance.toFixed(6):0}}BTC</label>
                             <label class="col-lg-12"
                                 style="font-size: x-large;">&#8776;{{selectTitre.balance_usd?selectTitre.balance_usd.toFixed(2):0}}$</label>
-                            <label class="col-lg-12" style="">{{ nombre_titre_achete }}/{{limit_titre_achete}}</label>
-                            <label class="col-lg-12" style="">{{ valeur_titre_achete?valeur_titre_achete.toFixed(2):0
+                            <label class="col-lg-12">{{ nombre_titre_achete }}/{{limit_titre_achete}}</label>
+                            <label class="col-lg-12">{{ valeur_titre_achete?valeur_titre_achete.toFixed(2):0
                                 }}$</label>
-                            <label class="col-lg-12" style="">{{ dividante_titre_achete?dividante_titre_achete.toFixed(2):0
+                            <label class="col-lg-12">{{ dividante_titre_achete?dividante_titre_achete.toFixed(2):0
                                 }}$</label>
                         </div>
                         <div class="col-lg-6 col-md-3 col-sm-4">

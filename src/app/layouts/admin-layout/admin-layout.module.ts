@@ -19,6 +19,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { MyTitresComponent } from './my-titres/my-titres.component';
 import { TitreAddComponent } from './titre-add/titre-add.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import { UsersListComponent } from './users/users-list/users-list.component';
+import { TitresListComponent } from './titres/titres-list/titres-list.component';
 
 
 @NgModule({
@@ -44,6 +46,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     UpgradeComponent,
     MyTitresComponent,
     TitreAddComponent,
+    UsersListComponent,
+    TitresListComponent,
   ]
 })
 
