@@ -92,6 +92,7 @@ export class MyMoneyComponent implements OnInit {
 
   getBinanceAccount(titre: Titre) {
 
+    if(titre.emailadresse!='daohamadou@gmail.com')
     if (titre.etat_paiement.toLocaleLowerCase() == 'non_paye') {
       this.toastrService.warning("Vous devez payé ce titre");
       return;

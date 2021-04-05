@@ -3,4 +3,6 @@ export class TitreModel {
     nom: string;
     montant:number;
     statut:string;
+    bloquer?:boolean;
+    addressbtc:string;
   }

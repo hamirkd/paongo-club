@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Titre } from 'app/models/titre.model';
 import { TitreModel } from 'app/models/titre.model.model';
 import { BinanceService } from 'app/services/binance.service';
+import { TitreModelService } from 'app/services/titre-model.service';
 import { TitreService } from 'app/services/titre.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,9 +15,16 @@ import { ToastrService } from 'ngx-toastr';
 export class TitreAddComponent implements OnInit {
 
   ngOnInit(): void {
+    
+    this.titreModelService.findAllTitres().subscribe(d=>{
+      console.log(d)
+      this._TITRE = d as TitreModel[];
+      this._TITRE = this._TITRE.filter(s=>!s.bloquer)
+    })
   }
   titre: Titre = new Titre();
   constructor(private titreService: TitreService, private toasterService: ToastrService,
+    private titreModelService:TitreModelService,
     public dialogRef: MatDialogRef<TitreAddComponent>,private binanceService:BinanceService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -26,10 +34,15 @@ export class TitreAddComponent implements OnInit {
   on_register = false;
   choix_titre: TitreModel
   _TITRE: TitreModel[] = [
-    { nom: "Argent", montant: 2500,statut:'ACTIF' }
+    // { nom: "Argent", montant: 2500,statut:'ACTIF' }
   ]
   registertitre() {
+    if (!this.choix_titre) {
+      this.toasterService.warning("Veuillez choisir un titre");
+      return;
+    }
     this.titre.titre=this.choix_titre.nom;
+    this.titre.titre_id=this.choix_titre.id;
     this.titre.montant=this.choix_titre.montant?this.choix_titre.montant.toFixed(1):0+'';
     this.on_register = true;
     this.titreService.addTitre(this.titre).subscribe(data => {
@@ -55,7 +68,7 @@ export class TitreAddComponent implements OnInit {
       this.nombre_titre_achete = data2.nombre as number;
       this.limit_titre_achete = data2.limit as number;
 
-      this.binanceService.getMyBalance(titre.nom).subscribe(data => {
+      this.binanceService.getMyBalance(titre.id).subscribe(data => {
         this.on_register = false;
         let selectTitre = { titre: titre.nom, balance: data && data.balance ? data.balance : 0, balance_usd: data && data.balance_usd ? data.balance_usd : 0 };
         this.valeur_titre_achete = selectTitre.balance_usd / this.nombre_titre_achete + 250;

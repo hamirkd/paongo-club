@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     login: string;
     password: string;
 
-    index = sessionStorage.getItem("slider-number") ? Number(sessionStorage.getItem("slider-number")) : 1;
+    index = localStorage.getItem("slider-number") ? Number(localStorage.getItem("slider-number")) : 1;
     imgItem = "/assets/img/slider-auth/" + this.index + ".jpg";
     informations: string[] = [
         "Les 10 meilleurs conseils de sécurité pour le Bitcoin",
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
             }
             this.imgItem = "/assets/img/slider-auth/" + this.index + ".jpg";
             this.information = this.informations[this.index];
-            sessionStorage.setItem("slider-number", this.index.toString());
+            localStorage.setItem("slider-number", this.index.toString());
             this.changeImg();
         }, 10000);
     }
@@ -199,7 +199,7 @@ export class LoginComponent implements OnInit {
         this.loading=true;
         this.on_login=true;
         this.userService.loginUserByLoginAndPassword(this.login, this.password).subscribe(data => {
-            sessionStorage.setItem("user_access", JSON.stringify(data));
+            localStorage.setItem("user_access", JSON.stringify(data));
             this.loading=false;
             this.toastr.success('Bienvenue','Authentification');
             if(this.userService.isAdmin()){

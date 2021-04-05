@@ -12,7 +12,7 @@
                                 </h4>
                             </div>
                             <div class="card-body" style="font-size: xxx-large;">
-                                {{titre.montant}}$
+                                {{titre.montant?titre.montant:0}}
                             </div>
                             <div class="card-footer" class="row">
                                 <div class="col-lg-6 col-md-3 col-sm-6">{{titre.etat_paiement|lowercase}}</div>

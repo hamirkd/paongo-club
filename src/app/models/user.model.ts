@@ -6,6 +6,7 @@ export class User{
     username:string;
     email:string;
     telephone:string;
+    cnib:string;
     password:string;
     password_confirmation?:string;
     pictureUrl:string;

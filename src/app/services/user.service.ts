@@ -25,8 +25,8 @@ export class UserService {
   }
 
   currentUser() {
-    if (sessionStorage.getItem('user_access')) {
-      return JSON.parse(sessionStorage.getItem('user_access'));
+    if (localStorage.getItem('user_access')) {
+      return JSON.parse(localStorage.getItem('user_access'));
     }
     return this.authGuardService.currentUserValue;
   }

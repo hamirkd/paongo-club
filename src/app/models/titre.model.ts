@@ -9,4 +9,5 @@ export class Titre {
   telephone: string;
   nomprenom: string;
   count_titre?:string;
+  titre_id?:number;
 }

@@ -15,7 +15,7 @@ export class AuthGuardService implements CanActivate {
         if (this.user) {
             return true;
         }
-        this.user = JSON.parse(sessionStorage.getItem("user_access"));
+        this.user = JSON.parse(localStorage.getItem("user_access"));
         if (this.user) {
             return true;
         }
@@ -27,8 +27,8 @@ export class AuthGuardService implements CanActivate {
         if (this.user) {
             return true;
         }
-        if (sessionStorage.getItem("user_access")) {
-            this.user = JSON.parse(sessionStorage.getItem("user_access"));
+        if (localStorage.getItem("user_access")) {
+            this.user = JSON.parse(localStorage.getItem("user_access"));
             return true;
         }
     }
@@ -38,15 +38,15 @@ export class AuthGuardService implements CanActivate {
             return this.user;
         }
         else
-        if (sessionStorage.getItem("user_access")) {
-            this.user = JSON.parse(sessionStorage.getItem("user_access"));
+        if (localStorage.getItem("user_access")) {
+            this.user = JSON.parse(localStorage.getItem("user_access"));
             return this.user;
         }
     }
 
     logout(){
         this.user=null;
-        sessionStorage.removeItem("user_access");
+        localStorage.removeItem("user_access");
         this._router.navigate(['/login']);
         return false;
     }
