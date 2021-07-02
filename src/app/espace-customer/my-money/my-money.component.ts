@@ -18,7 +18,7 @@ export class MyMoneyComponent implements OnInit {
   constructor(public dialog: MatDialog, private titreService: TitreService,
     private binanceService: BinanceService, private toastrService: ToastrService,
     private titreModelService:TitreModelService) { }
-  btn_add = false;
+  btn_add = true;
   ngOnInit(): void {
     this.getListeMyMoney();
     this.titreModelService.findAllTitres().subscribe(d=>{
@@ -36,8 +36,8 @@ export class MyMoneyComponent implements OnInit {
         return items;
       })
       
-      if (this._TITRE.length < 4) this.btn_add = true;
-      else this.btn_add = false;
+      // if (this._TITRE.length < 4) this.btn_add = true;
+      // else this.btn_add = false;
     }, err => {
       this.btn_add = true;
       console.log(err);

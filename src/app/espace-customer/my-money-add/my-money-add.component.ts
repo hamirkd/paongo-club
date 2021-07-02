@@ -58,12 +58,17 @@ export class MyMoneyAddComponent implements OnInit {
         this.toasterService.success("Le titre a été ajouté avec succès");
         this.dialogRef.close();
       }
+      else if(data.status == 400)
+      this.toasterService.warning(data.message);
       else
-        this.toasterService.error("Impossible d'ajouter le titre");
+      this.toasterService.error("Impossible d'ajouter le titre");
       console.log(data)
       this.on_register = false;
-    }, err => {
-      this.toasterService.error("Impossible d'ajouter le titre");
+    }, err => { 
+      console.log(err)
+      if(err.status == 400)
+      this.toasterService.warning(err.error.message);
+      else this.toasterService.error("Impossible d'ajouter le titre");
       this.on_register = false;
     });
   }
