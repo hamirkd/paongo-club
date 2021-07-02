@@ -22,11 +22,15 @@
                         [(ngModel)]="titre.emailadresse" required name="emailadresse">
                     </mat-form-field>
                 </div>
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-7 col-md-8">
                     <button class="btn btn-sm {{choix_titre==titre?'btn-danger':'btn-outline-danger'}} col-md-3" (click)="choix_titre_(titre)" *ngFor="let titre of _TITRE">{{titre.nom}}</button>
                 </div>
-                <div class="col-lg-4 col-md-2" style="text-align: center;align-self: center;font-size: xxx-large;">
+                <div *ngIf="!on_register" class="col-lg-5 col-md-3" style="text-align: center;align-self: center;font-size: xxx-large;">
                     {{valeur_titre_achete?valeur_titre_achete.toFixed(1):'0'}}$
+                </div>
+                <div class="col-lg-5 col-md-3" *ngIf="on_register"
+                style="text-align: center;align-self: center;">
+                    <img src="../../../../assets/img/waitting.gif" alt="" style="max-width: inherit;">
                 </div>
             </div>
             <div class="row" style="padding-top: 5%;">

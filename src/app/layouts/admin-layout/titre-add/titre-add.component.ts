@@ -6,7 +6,8 @@ import { BinanceService } from 'app/services/binance.service';
 import { TitreModelService } from 'app/services/titre-model.service';
 import { TitreService } from 'app/services/titre.service';
 import { ToastrService } from 'ngx-toastr';
-
+// EN DOLLAR
+const FRAIS_ACHAT = 250;
 @Component({
   selector: 'app-titre-add',
   templateUrl: './titre-add.component.html',
@@ -62,6 +63,9 @@ export class TitreAddComponent implements OnInit {
   choix_titre_(titre: TitreModel) {
     this.choix_titre = titre;
     this.on_register = true;
+    this.nombre_titre_achete = 0;
+    this.valeur_titre_achete = 0;
+    this.limit_titre_achete = 0;
     this.titreService.nombre_titre_acheter(titre.nom).subscribe(data => {
       
       let data2 = data as { nombre, montant, limit }
@@ -71,18 +75,18 @@ export class TitreAddComponent implements OnInit {
       this.binanceService.getMyBalance(titre.id).subscribe(data => {
         this.on_register = false;
         let selectTitre = { titre: titre.nom, balance: data && data.balance ? data.balance : 0, balance_usd: data && data.balance_usd ? data.balance_usd : 0 };
-        this.valeur_titre_achete = selectTitre.balance_usd / this.nombre_titre_achete + 250;
+        this.valeur_titre_achete = selectTitre.balance_usd / this.nombre_titre_achete + FRAIS_ACHAT;
         this.choix_titre.montant = this.valeur_titre_achete;
       }, err => {
         this.on_register = false;
-        this.valeur_titre_achete = 0;
-        this.choix_titre.montant = 0;
+        this.valeur_titre_achete = titre.montant+FRAIS_ACHAT;
+        this.choix_titre.montant = this.valeur_titre_achete;
       })
 
     }, err => {
       this.on_register = false;
-      this.nombre_titre_achete = 0;
-      this.valeur_titre_achete = 0;
+      this.nombre_titre_achete = titre.montant+FRAIS_ACHAT;
+      this.valeur_titre_achete = this.valeur_titre_achete;
       this.limit_titre_achete = 0;
     })
   }
