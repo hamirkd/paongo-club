@@ -10,4 +10,5 @@ export class Titre {
   nomprenom: string;
   count_titre?:string;
   titre_id?:number;
+  money?:string;
 }

@@ -93,7 +93,16 @@ e
         let items = data[personNamedIndex];
         return items;
       })
-      this._TITRE.sort((a,b) => a.nomprenom.localeCompare(b.nomprenom));
+      this._TITRE.sort((a,b) =>a.nomprenom.localeCompare(b.nomprenom));
+      //**  FILTRE SUR LA PREMIERE LISTE, RECUPERER TOUS LES TITRES ARGENTS **/
+      const grouped = groupBy(this._TITRE, pet => pet.titre);
+      this._TITRE = [];
+      grouped.forEach(liste=>{
+        console.log(liste)
+        this._TITRE.push(...liste);
+      })
+      // console.log(grouped);
+      
     }, err => {
     })
   }
@@ -196,4 +205,18 @@ e
     })
   }
   
+  
+}
+function groupBy(list, keyGetter):Map<string,Titre[]> {
+  const map = new Map();
+  list.forEach((item) => {
+       const key = keyGetter(item);
+       const collection = map.get(key);
+       if (!collection) {
+           map.set(key, [item]);
+       } else {
+           collection.push(item);
+       }
+  });
+  return map;
 }
