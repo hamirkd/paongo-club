@@ -25,17 +25,17 @@ export class MyMoneyAddComponent implements OnInit {
       this.titre.telephone = user.telephone;
       this.titre.emailadresse = user.email;
     })
-    this.titreModelService.findAllTitres().subscribe(d=>{
+    this.titreModelService.findAllTitres().subscribe(d => {
       console.log(d)
       this._TITRE = d as TitreModel[];
-      this._TITRE = this._TITRE.filter(s=>!s.bloquer)
+      this._TITRE = this._TITRE.filter(s => !s.bloquer)
     })
   }
   titre: Titre = new Titre();
   user: User;
   constructor(private userService: UserService, private titreService: TitreService, private toasterService: ToastrService,
     public dialogRef: MatDialogRef<MyMoneyAddComponent>, private binanceService: BinanceService,
-    private titreModelService:TitreModelService,
+    private titreModelService: TitreModelService,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -50,24 +50,25 @@ export class MyMoneyAddComponent implements OnInit {
       return;
     }
     this.titre.titre = this.choix_titre.nom;
-    this.titre.titre_id=this.choix_titre.id;
-    this.titre.montant=this.choix_titre.montant?this.choix_titre.montant.toFixed(1):0+'';
+    this.titre.titre_id = this.choix_titre.id;
+    this.titre.version = "V1";
+    this.titre.montant = this.choix_titre.montant ? this.choix_titre.montant.toFixed(1) : 0 + '';
     this.on_register = true;
     this.titreService.addTitre(this.titre).subscribe(data => {
       if (data.status == 200) {
         this.toasterService.success("Le titre a été ajouté avec succès");
         this.dialogRef.close();
       }
-      else if(data.status == 400)
-      this.toasterService.warning(data.message);
+      else if (data.status == 400)
+        this.toasterService.warning(data.message);
       else
-      this.toasterService.error("Impossible d'ajouter le titre");
+        this.toasterService.error("Impossible d'ajouter le titre");
       console.log(data)
       this.on_register = false;
-    }, err => { 
+    }, err => {
       console.log(err)
-      if(err.status == 400)
-      this.toasterService.warning(err.error.message);
+      if (err.status == 400)
+        this.toasterService.warning(err.error.message);
       else this.toasterService.error("Impossible d'ajouter le titre");
       this.on_register = false;
     });
@@ -78,8 +79,31 @@ export class MyMoneyAddComponent implements OnInit {
     this.nombre_titre_achete = 0;
     this.valeur_titre_achete = 0;
     this.limit_titre_achete = 0;
+    this.choix_titre.montant = 0;
+    this.titreService.montant_achat_titre_id(titre.id).subscribe(data => {
+
+      let data2 = data as { titre, balance, balance_usd, valeur_titre_achete, limit }
+
+      this.valeur_titre_achete = data2.valeur_titre_achete as number;
+      this.choix_titre.montant = data2.valeur_titre_achete as number;
+      this.limit_titre_achete = data2.limit as number;
+      this.on_register = false;
+
+    }, err => {
+      this.on_register = false;
+      this.nombre_titre_achete = 0;
+      this.valeur_titre_achete = 0;
+      this.limit_titre_achete = 0;
+    })
+  }
+  choix_titre_1(titre: TitreModel) {
+    this.choix_titre = titre;
+    this.on_register = true;
+    this.nombre_titre_achete = 0;
+    this.valeur_titre_achete = 0;
+    this.limit_titre_achete = 0;
     this.titreService.nombre_titre_acheter(titre.nom).subscribe(data => {
-      
+
       let data2 = data as { nombre, montant, limit }
       this.nombre_titre_achete = data2.nombre as number;
       this.limit_titre_achete = data2.limit as number;
@@ -91,13 +115,13 @@ export class MyMoneyAddComponent implements OnInit {
         this.choix_titre.montant = this.valeur_titre_achete;
       }, err => {
         this.on_register = false;
-        this.valeur_titre_achete = titre.montant+FRAIS_ACHAT;
+        this.valeur_titre_achete = titre.montant + FRAIS_ACHAT;
         this.choix_titre.montant = this.valeur_titre_achete;
       })
 
     }, err => {
       this.on_register = false;
-      this.nombre_titre_achete = titre.montant+FRAIS_ACHAT;
+      this.nombre_titre_achete = titre.montant + FRAIS_ACHAT;
       this.valeur_titre_achete = this.valeur_titre_achete;
       this.limit_titre_achete = 0;
     })

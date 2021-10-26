@@ -5,4 +5,5 @@ export class TitreModel {
     statut:string;
     bloquer?:boolean;
     addressbtc:string;
+    money?:string;
   }

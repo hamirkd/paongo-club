@@ -11,4 +11,5 @@ export class Titre {
   count_titre?:string;
   titre_id?:number;
   money?:string;
+  version?:string;
 }

@@ -48,6 +48,9 @@ export class TitreService {
   nombre_titre_acheter(titreModel:string){
     return this.http.get(this.baseUrl + "api/achats_/nombre_titre_acheter/"+titreModel);
   }
+  montant_achat_titre_id(titreModel:number){
+    return this.http.get(this.baseUrl + "api/achats_/montant_achat_titre_id/"+titreModel);
+  }
   
 
 }
